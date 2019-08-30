@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from "react-router";
 import Header from "@component/Header";
 import CardsPage from "@component/CardsPage";
 import SearchPage from "@component/SearchPage";
-import { CONST_URLS } from "@data/Constants";
+import { CONST_URLS, CONST_STORAGE } from "@data/Constants";
 
 interface AppProps {
   AppStore;
@@ -19,18 +19,18 @@ export default class App extends React.Component<AppProps> {
         return;
       }
       response.json().then(data => {
-        let CacheState = JSON.parse(window.localStorage.getItem("creditcards"));
-        console.log("creditcards", CacheState);
+        let CacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.CC_STORAGE));
+        console.log(CONST_STORAGE.CC_STORAGE, CacheState);
         if (CacheState !== null && CacheState.savedCards !== undefined) {
           this.props.AppStore.dispatch({
-            type: "READ_CACHE",
+            type: "READ_CC_CACHE",
             savedCurrentID: CacheState.savedCards.currentCardID,
             savedCards: CacheState.savedCards.cards,
             savedValidation: CacheState.validation
           });
         }
         this.props.AppStore.dispatch({
-          type: "UPDATE_CONFIG",
+          type: "UPDATE_CC_CONFIG",
           configdata: data
         });
       });
@@ -41,17 +41,32 @@ export default class App extends React.Component<AppProps> {
         console.log("Could not load search filters!");
         return;
       }
-      response.json().then(data => console.log({ ...data.filters }));
+      response.json().then(data => {
+          let CacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.SEARCH_STORAGE));
+          console.log(CONST_STORAGE.SEARCH_STORAGE, CacheState);
+          if(CacheState !== null && CacheState.filtersList !== undefined) {
+              this.props.AppStore.dispatch({
+                  type: 'READ_SEARCH_CACHE',
+                  filterBrand: CacheState.filtersList.BRAND,
+                  filterColor: CacheState.filtersList.COLOR,
+                  filterPrice: CacheState.filtersList.PRICE,
+              })
+          }
+          this.props.AppStore.dispatch({
+              type: 'UPDATE_SEARCH_FILTERS',
+              filterdata: data
+          })
+      });
     });
   }
 
   componentDidUpdate = () => {
-    let CacheStateString = JSON.stringify(this.props.AppStore.getState());
-    console.log("Storing state", CacheStateString);
-    window.localStorage.setItem("creditcards", CacheStateString);
-    console.log(this.props.AppStore.getState());
+    let CreditCardCacheString = JSON.stringify(this.props.AppStore.getState().CreditCardsAppReducer);
+    let SearchCacheString = JSON.stringify(this.props.AppStore.getState().SearchAppReducer);
+    console.log("Component Updated", {CreditCardCacheString, SearchCacheString});
+    window.localStorage.setItem(CONST_STORAGE.CC_STORAGE, CreditCardCacheString);
+    window.localStorage.setItem(CONST_STORAGE.SEARCH_STORAGE, SearchCacheString);
   };
-
   addNewCreditCardHandler = cardData => {
     this.props.AppStore.dispatch({
       type: "ADD_CARD",
@@ -80,23 +95,25 @@ export default class App extends React.Component<AppProps> {
           <Route
             path="/search"
             render={() => (
-              <div className="mainContent">
-                <SearchPage />
-              </div>
+                <div className="mainContent">
+                    <SearchPage 
+                    searchfilters={this.props.AppStore.getState().SearchAppReducer.filtersList}
+                    />
+                </div>
             )}
           ></Route>
           <Route
             path="/manage-cards"
             render={() => (
-              <div className="mainContent">
-                <CardsPage
-                  validation={this.props.AppStore.getState().CreditCardsAppReducer.validation}
-                  editCreditCard={this.editCreditCard}
-                  removeCreditCardById={this.removeCreditCardById}
-                  addCreditCardHandler={this.addNewCreditCardHandler}
-                  cards={this.props.AppStore.getState().CreditCardsAppReducer.savedCards.getCards()}
-                />
-              </div>
+                <div className="mainContent">
+                    <CardsPage
+                    validation={this.props.AppStore.getState().CreditCardsAppReducer.validation}
+                    editCreditCard={this.editCreditCard}
+                    removeCreditCardById={this.removeCreditCardById}
+                    addCreditCardHandler={this.addNewCreditCardHandler}
+                    cards={this.props.AppStore.getState().CreditCardsAppReducer.savedCards.getCards()}
+                    />
+                </div>
             )}
           ></Route>
           <Redirect from="/" to="/search"></Redirect>

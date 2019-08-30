@@ -1,0 +1,35 @@
+form.search-filters {
+    flex-basis: 20%;
+    background: #fff;
+    box-shadow: 2px 2px 5px var(--secondary-outline);
+    height: auto;
+    margin: 10px;
+    .search-filter-group {
+        padding: 20px;
+        border-bottom: 1px solid var(--secondary-outline);
+        input[type="text"], select {
+            padding: 10px 20px 10px 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+        }
+        input[type="checkbox"] {
+            cursor: pointer;
+        }
+        > .separator {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        div.color-input {
+            margin-top: 5px; 
+        }
+        span.color-display-bubble {
+            display: inline-table;
+            height: 0.8em;
+            width: 0.8em;
+            border-radius: 50%;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+}

@@ -62,7 +62,7 @@ export default class CardsPage extends React.Component<CardsPageProps & CardsPag
     render = () => {
         console.log(this.props.cards);
         return (
-            <div className='content'>
+            <div className='cc-content'>
                 <h4>Manage Credit Cards</h4>
                 {!this.state.AddNew && <div className="card AddNewButton" 
                                         onClick={() => {

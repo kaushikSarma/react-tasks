@@ -11,10 +11,18 @@ body {
     color: #5d5d5d;
 }
 
+h1, h2, h4, h5, h6 {
+    font-weight: 400;
+}
+
 div.mainContent {
     text-align: center;
     width: 100vw;
     height: 100vh;
+}
+
+div.cc-content {
+    width: 100%;
     padding-left: 400px;
     padding-right: 400px; 
 }

@@ -1,7 +1,22 @@
 import * as React from 'react';
 
-export default class SearchPage extends React.Component {
+import './index.scss';
+import SearchFilterPane from '@component/SearchFiltersPane';
+import SearchContent from '@component/SearchContent';
+
+interface SearchPageProps {
+    searchfilters:{
+        BRAND:{type:string, values:{}[] } ,
+        COLOR: {type:string, values:{}[] },
+        PRICE: {type:string, values:{}[] },
+    };
+}
+
+export default class SearchPage extends React.Component<SearchPageProps> {
     render = () => {
-        return <div>Search Page</div>
+        return <div className="search-page-wrapper">
+            <SearchFilterPane filters={this.props.searchfilters}></SearchFilterPane>
+            <SearchContent></SearchContent>
+        </div>
     }
 }
