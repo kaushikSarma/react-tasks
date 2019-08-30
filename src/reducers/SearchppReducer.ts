@@ -9,6 +9,8 @@ class SearchAppState {
     }
 }
 
-export const SearchAppReducer = (state: number = 0, action) => state
+export const SearchAppReducer = (state: SearchAppState = new SearchAppState({
+    brand: {}, color: {}, price: {}
+}), action) => state
 
 
