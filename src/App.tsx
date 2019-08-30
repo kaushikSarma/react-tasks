@@ -18,75 +18,89 @@ export default class App extends React.Component<AppProps> {
         console.log("Could not load credit card validations config!");
         return;
       }
+      let CcCacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.CC_STORAGE));
+      console.log(CONST_STORAGE.CC_STORAGE, CcCacheState);
+      if (CcCacheState !== null && CcCacheState.savedCards !== undefined) {
+        this.props.AppStore.dispatch({
+          type: "READ_CC_CACHE",
+          savedCurrentID: CcCacheState.savedCards.currentCardID,
+          savedCards: CcCacheState.savedCards.cards,
+          savedValidation: CcCacheState.validation
+        });
+      }
       response.json().then(data => {
-        let CacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.CC_STORAGE));
-        console.log(CONST_STORAGE.CC_STORAGE, CacheState);
-        if (CacheState !== null && CacheState.savedCards !== undefined) {
-          this.props.AppStore.dispatch({
-            type: "READ_CC_CACHE",
-            savedCurrentID: CacheState.savedCards.currentCardID,
-            savedCards: CacheState.savedCards.cards,
-            savedValidation: CacheState.validation
-          });
-        }
         this.props.AppStore.dispatch({
           type: "UPDATE_CC_CONFIG",
           configdata: data
         });
       });
     });
-
-    fetch(CONST_URLS.SEARCH_FILTERS_URL).then(response => {
-      if (response.status !== 200) {
-        console.log("Could not load search filters!");
-        return;
-      }
-      response.json().then(data => {
-          let CacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.SEARCH_STORAGE));
-          console.log(CONST_STORAGE.SEARCH_STORAGE, CacheState);
-          if(CacheState !== null && CacheState.filtersList !== undefined) {
-              this.props.AppStore.dispatch({
-                  type: 'READ_SEARCH_CACHE',
-                  filterBrand: CacheState.filtersList.BRAND,
-                  filterColor: CacheState.filtersList.COLOR,
-                  filterPrice: CacheState.filtersList.PRICE,
-              })
-          }
+    {
+      let CacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.SEARCH_STORAGE));
+      console.log(CONST_STORAGE.SEARCH_STORAGE, CacheState);
+      if(CacheState !== null && CacheState.filtersList !== undefined) {
           this.props.AppStore.dispatch({
-              type: 'UPDATE_SEARCH_FILTERS',
-              filterdata: data
+              type: 'READ_SEARCH_CACHE',
+              filterBrand: CacheState.filtersList.BRAND,
+              filterColor: CacheState.filtersList.COLOR,
+              filterPrice: CacheState.filtersList.PRICE,
           })
-      });
-    });
+      } else {
+        fetch(CONST_URLS.SEARCH_FILTERS_URL).then(response => {
+          if (response.status !== 200) {
+            console.log("Could not load search filters!");
+            return;
+          }
+          response.json().then(data => {
+              this.props.AppStore.dispatch({
+                  type: 'UPDATE_SEARCH_FILTERS',
+                  filterdata: data
+              })
+          });
+        });
+      }
+    }
   }
 
   componentDidUpdate = () => {
-    let CreditCardCacheString = JSON.stringify(this.props.AppStore.getState().CreditCardsAppReducer);
     let SearchCacheString = JSON.stringify(this.props.AppStore.getState().SearchAppReducer);
-    console.log("Component Updated", {CreditCardCacheString, SearchCacheString});
-    window.localStorage.setItem(CONST_STORAGE.CC_STORAGE, CreditCardCacheString);
     window.localStorage.setItem(CONST_STORAGE.SEARCH_STORAGE, SearchCacheString);
   };
+
   addNewCreditCardHandler = cardData => {
     this.props.AppStore.dispatch({
       type: "ADD_CARD",
       cardData: cardData
     });
+    console.log('Update on add');
+    this.updateCCCache();
   };
+  
   removeCreditCardById = (cardID: number) => {
     if (confirm("Are you sure?")) {
       this.props.AppStore.dispatch({
         type: "REMOVE_CARD",
         cardID: cardID
       });
+      console.log('Update on remove');
+      this.updateCCCache();
     }
   };
+
   editCreditCard = cardData => {
     this.props.AppStore.dispatch({
       type: "EDIT_CARD",
       cardData: cardData
     });
+    console.log('Update on edit');
+    this.updateCCCache();
   };
+
+  updateCCCache = () => {
+    let CreditCardCacheString = JSON.stringify(this.props.AppStore.getState().CreditCardsAppReducer);
+    window.localStorage.setItem(CONST_STORAGE.CC_STORAGE, CreditCardCacheString);
+  }
+
   render = () => {
     return (
       <React.Fragment>

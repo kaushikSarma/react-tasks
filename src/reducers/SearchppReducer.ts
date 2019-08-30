@@ -2,13 +2,33 @@ class SearchAppState {
     filtersList: {BRAND:{} , COLOR: {}, PRICE:{}} = {
         BRAND: {} , COLOR:{}, PRICE:{}
     };
-    // productList: {
-    //     products: []
-    // }
-    constructor({brand, color, price}: {brand: {}, color: {}, price:{}}) {
+    productList: {
+        sortyBy: string,
+        products: {
+            "id": string,
+            "colour"?: {
+                "color": string,
+                "title": string
+            },
+            "brand"?: string,
+            "discount"?: number,
+            "rating"?: number,
+            "image"?: string,
+            "price"?: {
+                "mrp"?: number
+                "final_price"?: number
+            },
+            "title"?: "Provogue Running Shoes For Men"
+        }[]
+    } = {
+        sortyBy: "REL", products: []
+    }
+    constructor({brand, color, price, sortyBy = "REL", products = []}: {brand: {}, color: {}, price:{}, sortyBy?: string, products?: []}) {
         this.filtersList.BRAND = brand;
         this.filtersList.COLOR = color;
         this.filtersList.PRICE = price;
+        this.productList.sortyBy = sortyBy;
+        this.productList.products = products;
     }
 }
 

@@ -31,6 +31,9 @@ export default class CardsPage extends React.Component<CardsPageProps & CardsPag
         }
     }
 
+    componentDidUpdate = () => {
+    }
+
     cancelAddCard = () => {
         this.setState({
             AddNew: false
