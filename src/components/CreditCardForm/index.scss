@@ -1,0 +1,15 @@
+form {
+    background: #efefef;
+    p.footer {
+        padding-left: 10px;
+        color: #3d3d3d;
+        .highlight {
+            color: red;
+        }
+    }
+    header {
+        text-transform: uppercase;
+        width: 100%;
+        padding-left: 10px;
+    }
+}
