@@ -44,6 +44,8 @@ export default class App extends React.Component<AppProps> {
               filterBrand: CacheState.filtersList.BRAND,
               filterColor: CacheState.filtersList.COLOR,
               filterPrice: CacheState.filtersList.PRICE,
+              sortBy: CacheState.productsList === undefined ? "REL" : CacheState.productsList.sortBy,
+              products: CacheState.productsList === undefined ? [] : CacheState.productsList.products,
           })
       } else {
         fetch(CONST_URLS.SEARCH_FILTERS_URL).then(response => {
@@ -53,19 +55,29 @@ export default class App extends React.Component<AppProps> {
           }
           response.json().then(data => {
               this.props.AppStore.dispatch({
-                  type: 'UPDATE_SEARCH_FILTERS',
-                  filterdata: data
+                type: 'UPDATE_SEARCH_FILTERS',
+                filterdata: data
               })
+              this.updateSearchCache();
           });
         });
       }
+      fetch(CONST_URLS.SEARCH_PRODUCTS_URL).then(response => {
+        if(response.status !== 200) {
+          console.log("Could not fetch list of ");
+          return;
+        }
+        response.json().then(data => {
+          console.log("PRODUCTS FROM API",response);
+            this.props.AppStore.dispatch({
+              type: 'UPDATE_SEARCH_LIST',
+              productList: data.products
+            });
+            this.updateSearchCache();
+        });
+      })
     }
   }
-
-  componentDidUpdate = () => {
-    let SearchCacheString = JSON.stringify(this.props.AppStore.getState().SearchAppReducer);
-    window.localStorage.setItem(CONST_STORAGE.SEARCH_STORAGE, SearchCacheString);
-  };
 
   addNewCreditCardHandler = cardData => {
     this.props.AppStore.dispatch({
@@ -100,6 +112,11 @@ export default class App extends React.Component<AppProps> {
     let CreditCardCacheString = JSON.stringify(this.props.AppStore.getState().CreditCardsAppReducer);
     window.localStorage.setItem(CONST_STORAGE.CC_STORAGE, CreditCardCacheString);
   }
+  
+  updateSearchCache = () => {
+    let SearchCacheString = JSON.stringify(this.props.AppStore.getState().SearchAppReducer);
+    window.localStorage.setItem(CONST_STORAGE.SEARCH_STORAGE, SearchCacheString);
+  }
 
   render = () => {
     return (
@@ -112,6 +129,7 @@ export default class App extends React.Component<AppProps> {
                 <div className="mainContent">
                     <SearchPage 
                     searchfilters={this.props.AppStore.getState().SearchAppReducer.filtersList}
+                    productsList={this.props.AppStore.getState().SearchAppReducer.productList}
                     />
                 </div>
             )}

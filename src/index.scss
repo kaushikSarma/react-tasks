@@ -50,7 +50,7 @@ button {
 
 span[class^="icon-"] {
     padding: 5px 10px 5px 10px;
-    box-shadow: 2px 2px 2px #5d5d5d;
+    box-shadow: 0 0 2px #5d5d5d;
     border-radius: 2px;
     text-transform: uppercase;
     margin-right: 10px;
@@ -69,4 +69,11 @@ span.icon-master {
 span.icon-maestro {
     background: var(--primary-underline);
     color: var(--secondary-underline);
+}
+
+.position-fixed {
+    position: fixed;
+}
+.position-absolute {
+    // position: absolute;
 }

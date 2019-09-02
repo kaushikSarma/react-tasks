@@ -39,8 +39,8 @@ export default class SearchFilterPane extends React.Component<SearchFilterProps,
         }
         return 0;
     }
-    getSelectedColors = (): string[] =>
-    this.props.filters.COLOR.values.filter((c, index) => this.state.colors[index]).map(c => c['color'])
+    getSelectedColors = (): {} =>
+    this.props.filters.COLOR.values.filter((c, index) => this.state.colors[index])
     
     
     updateFilters = event => {
@@ -97,7 +97,7 @@ export default class SearchFilterPane extends React.Component<SearchFilterProps,
 
     render = () => {
         return (
-            <form className="search-filters">
+            <form className="search-filters position-absolute">
                 <div className="search-filter-group">
                     <h3>Filters</h3>
                 </div>
@@ -121,6 +121,7 @@ export default class SearchFilterPane extends React.Component<SearchFilterProps,
                      && this.props.filters.COLOR.values.map((choice, index) =>  {
                         return <div key={`color-${choice['title']}`} className='color-input'><input type="checkbox" name="colorChoices" onChange={this.updateFilters} data-index={index} checked={this.state.colors[index]}></input><span className="color-display-bubble" style={{background: choice['color']}}></span><label>{choice['title']}</label></div>
                     })}
+                    <br/>
                 </div>
             </form>
         );

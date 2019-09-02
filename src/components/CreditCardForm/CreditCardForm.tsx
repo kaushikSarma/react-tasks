@@ -185,11 +185,11 @@ export default class CreditCardForm extends React.Component<CreditCardFormProps,
                 </FormRow>
                 <FormRow>
                     <div className='inputField'>
-                        <button className='primary'>{isAddMode ? <b>Save</b> : <b>Update</b>} this card</button>
-                        <button className='nobackground' onClick={this.cancel}>Cancel</button>
+                        <button type="submit" className='primary'>{isAddMode ? <b>Save</b> : <b>Update</b>} this card</button>
+                        <button type="button" className='nobackground' onClick={this.cancel}>Cancel</button>
                     </div>
                 </FormRow>
-                <p className='footer'><b className='highlight'>*</b>Your card details will be securely stored for faster payments. Your CVV will not be stored</p>
+                <p className='footer'><b className='highlight'>*</b> Your card details will be securely stored for faster payments. Your CVV will not be stored</p>
             </form>
         )
     }
