@@ -44,8 +44,7 @@ export default class App extends React.Component<AppProps> {
               filterBrand: CacheState.filtersList.BRAND,
               filterColor: CacheState.filtersList.COLOR,
               filterPrice: CacheState.filtersList.PRICE,
-              sortBy: CacheState.productsList === undefined ? "REL" : CacheState.productsList.sortBy,
-              products: CacheState.productsList === undefined ? [] : CacheState.productsList.products,
+              products: CacheState.products === undefined ? [] : CacheState.products,
           })
       } else {
         fetch(CONST_URLS.SEARCH_FILTERS_URL).then(response => {
@@ -68,12 +67,12 @@ export default class App extends React.Component<AppProps> {
           return;
         }
         response.json().then(data => {
-          console.log("PRODUCTS FROM API",response);
-            this.props.AppStore.dispatch({
-              type: 'UPDATE_SEARCH_LIST',
-              productList: data.products
-            });
-            this.updateSearchCache();
+          console.log("PRODUCTS FROM API", data);
+          this.props.AppStore.dispatch({
+            type: 'UPDATE_SEARCH_LIST',
+            products: data.products
+          });
+          this.updateSearchCache();
         });
       })
     }
@@ -112,7 +111,7 @@ export default class App extends React.Component<AppProps> {
     let CreditCardCacheString = JSON.stringify(this.props.AppStore.getState().CreditCardsAppReducer);
     window.localStorage.setItem(CONST_STORAGE.CC_STORAGE, CreditCardCacheString);
   }
-  
+
   updateSearchCache = () => {
     let SearchCacheString = JSON.stringify(this.props.AppStore.getState().SearchAppReducer);
     window.localStorage.setItem(CONST_STORAGE.SEARCH_STORAGE, SearchCacheString);
@@ -129,7 +128,7 @@ export default class App extends React.Component<AppProps> {
                 <div className="mainContent">
                     <SearchPage 
                     searchfilters={this.props.AppStore.getState().SearchAppReducer.filtersList}
-                    productsList={this.props.AppStore.getState().SearchAppReducer.productList}
+                    products={this.props.AppStore.getState().SearchAppReducer.products}
                     />
                 </div>
             )}

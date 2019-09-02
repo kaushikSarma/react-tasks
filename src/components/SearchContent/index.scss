@@ -17,6 +17,16 @@ div.results-section {
         span {
             margin: 10px;
         }
+        span.sort-control {
+            cursor: pointer;
+            transition: all 0.2s;
+            &:hover {
+                color: var(--primary);
+            }
+        }
+        span.sort-control.active {
+            color: var(--primary);
+        }
     }
     div.result-list {
         display: flex;

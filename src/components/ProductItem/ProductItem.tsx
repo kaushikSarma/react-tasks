@@ -3,7 +3,7 @@ import * as React from "react";
 import './index.scss';
 
 interface ProductItemProps {
-    "id": string,
+    "id"?: string,
     "colour"?: {
         "color": string,
         "title": string
@@ -16,7 +16,7 @@ interface ProductItemProps {
         "mrp"?: number
         "final_price"?: number
     },
-    "title"?: "Provogue Running Shoes For Men"
+    "title"?: string
 }
 
 export default class ProductItem extends React.Component<ProductItemProps> {

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import './index.scss';
-import { exists } from 'fs';
 
 interface SearchFilterProps {
     filters: {
@@ -9,6 +8,7 @@ interface SearchFilterProps {
         COLOR: {type:string, values:{}[] },
         PRICE: {type:string, values:{}[] },
     }
+    setFilters(filters);
 }
 
 interface SearchFilterState {
@@ -20,7 +20,6 @@ interface SearchFilterState {
 export default class SearchFilterPane extends React.Component<SearchFilterProps, SearchFilterState> {
     constructor (props) {
         super(props);
-        console.log(this.props.filters.COLOR)
         this.state = {
             minprice: "Min",
             maxprice: "Max",
@@ -33,8 +32,7 @@ export default class SearchFilterPane extends React.Component<SearchFilterProps,
         return object !== null  && object !== undefined && object !== {} && object.length > 0;
     }
     getNumColors = ():number => {
-        if (this.exists(this.props.filters.COLOR) && this.exists(this.props.filters.COLOR.values))
-        {   console.log(this.props.filters.COLOR.values.length);
+        if (this.exists(this.props.filters.COLOR) && this.exists(this.props.filters.COLOR.values)) {
             return this.props.filters.COLOR.values.length;
         }
         return 0;
@@ -51,16 +49,18 @@ export default class SearchFilterPane extends React.Component<SearchFilterProps,
             {   event.preventDefault();
                 const minindex = this.props.filters.PRICE.values.findIndex(e => e['key'] === val);
                 const maxindex = this.props.filters.PRICE.values.findIndex(e => e['key'] === this.state.maxprice);
-                console.log(minindex, maxindex);
-                minindex < maxindex && this.setState({ minprice: val });
+                minindex < maxindex && this.setState({ minprice: val }, () => {
+                    this.getSearchReults();
+                });
                 break;
             }
             case 'maxprice': 
             {   event.preventDefault();
                 const minindex = this.props.filters.PRICE.values.findIndex(e => e['key'] === this.state.minprice);
                 const maxindex = this.props.filters.PRICE.values.findIndex(e => e['key'] === val);
-                console.log(minindex, maxindex);
-                minindex < maxindex && this.setState({ maxprice: val });
+                minindex < maxindex && this.setState({ maxprice: val }, () => {
+                    this.getSearchReults();
+                });
                 break;
             }
             case 'brand': 
@@ -79,7 +79,7 @@ export default class SearchFilterPane extends React.Component<SearchFilterProps,
                 this.setState({
                     colors: newstate
                 }, () => {
-                    console.log(this.getSelectedColors());
+                    this.getSearchReults();
                 });                
                 break;
             }
@@ -87,12 +87,12 @@ export default class SearchFilterPane extends React.Component<SearchFilterProps,
     }
 
     getSearchReults = () => {
-        console.log("The search filters are: ", {
+        this.props.setFilters({
             minprice: this.state.minprice,
             maxprice: this.state.maxprice,
             brand: this.state.brand,
-            color: this.getSelectedColors()
-        })
+            colors: this.getSelectedColors()
+        });
     }
 
     render = () => {
