@@ -12,7 +12,7 @@ module.exports = (env, argv) => {
         output: {
             path: path.join(__dirname, '/dist'),
             filename: 'bundle.js',
-            publicPath: '/'
+            publicPath: ''
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.json'],

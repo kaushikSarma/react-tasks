@@ -123,7 +123,7 @@ export default class App extends React.Component<AppProps> {
         <Header />
         <Switch>
           <Route
-            path="/search"
+            path={"/search"}
             render={() => (
                 <div className="mainContent">
                     <SearchPage 
@@ -134,7 +134,7 @@ export default class App extends React.Component<AppProps> {
             )}
           ></Route>
           <Route
-            path="/manage-cards"
+            path={"/manage-cards"}
             render={() => (
                 <div className="mainContent">
                     <CardsPage
