@@ -143,19 +143,15 @@ class SearchPage extends React.Component<SearchPageProps & SearchPageActions, Se
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        searchfilters: state.SearchAppReducer.filtersList,
-        products: state.SearchAppReducer.products
-    }
-}
+const mapStateToProps = state => ({
+    searchfilters: state.SearchAppReducer.filtersList,
+    products: state.SearchAppReducer.products
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        readCache: (CacheState) => dispatch(SearchActions.readCache(CacheState)),
-        updateFilters: (data) => dispatch(SearchActions.updateFilters(data)),
-        updateCatalog: (data) => dispatch(SearchActions.updateCatalog(data)),
-    }
-}
+const mapDispatchToProps = dispatch => ({
+    readCache: (CacheState) => dispatch(SearchActions.readCache(CacheState)),
+    updateFilters: (data) => dispatch(SearchActions.updateFilters(data)),
+    updateCatalog: (data) => dispatch(SearchActions.updateCatalog(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

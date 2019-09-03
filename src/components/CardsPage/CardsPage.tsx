@@ -113,22 +113,18 @@ class CardsPage extends React.Component <CardsPageProps & CardsPageEventHandlers
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        reducerState: state['CreditCardsAppReducer'],
-        cards: state['CreditCardsAppReducer']['savedCards']['cards'],
-        validation: state['CreditCardsAppReducer']['validation'],
-    }
-}
+const mapStateToProps = (state) => ({
+    reducerState: state['CreditCardsAppReducer'],
+    cards: state['CreditCardsAppReducer']['savedCards']['cards'],
+    validation: state['CreditCardsAppReducer']['validation'],
+});
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        readCache: CcCacheState => dispatch(CardActions.readCache(CcCacheState)),
-        updateCache: data => dispatch(CardActions.updateCache(data)),
-        addCard: data => dispatch(CardActions.addCard(data)),
-        removeCard: cardid => dispatch(CardActions.removeCard(cardid)),
-        editCard: cardData => dispatch(CardActions.editCard(cardData)),
-    }
-}
+const mapDispatchToProps = (dispatch) => ({
+    readCache: CcCacheState => dispatch(CardActions.readCache(CcCacheState)),
+    updateCache: data => dispatch(CardActions.updateCache(data)),
+    addCard: data => dispatch(CardActions.addCard(data)),
+    removeCard: cardid => dispatch(CardActions.removeCard(cardid)),
+    editCard: cardData => dispatch(CardActions.editCard(cardData)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage);
