@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import './index.scss';
 import ProductItem from '@component/ProductItem/ProductItem';
+import { Product } from '@data/Product';
 
 interface SearchContentProps {
-    products: {}[],
+    products: Product[],
     filtersList: {},
     searchQuery: string
     sort(sortby);

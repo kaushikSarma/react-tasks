@@ -61,9 +61,16 @@ export default class CreditCardForm extends React.Component<CreditCardFormProps,
             case 'expiryMonth': this.setState({ expiryMonth: isNaN(parseInt(value)) ? 0 : parseInt(value) }); break;
             case 'expiryYear': this.setState({ expiryYear: isNaN(parseInt(value)) ? 0 : parseInt(value) }); break;
             case 'cvv': 
+                console.log(event);
                 if(value !== '' && isNaN(parseInt(value.substr(-1)))) {
-                    value = this.state.number;
-                } else this.setState({ cvv: value }, this.checkValidityConfig ); 
+                    value = this.state.cvv;
+                } else if (value.length > this.state.cvv.length && this.state.type !== "" && this.state.cvv.length === Object.values(this.props.validations).find(c => c['displayText'] === this.state.type)['cvvLength']) {
+                    console.log("CVV length", Object.values(this.props.validations).find(c => c['displayText'] === this.state.type)['cvvLength'])
+                    value = this.state.cvv;
+                } 
+                else {
+                    this.setState({ cvv: value }, this.checkValidityConfig );
+                } 
                 break;
             default: break;
         }
@@ -82,13 +89,18 @@ export default class CreditCardForm extends React.Component<CreditCardFormProps,
             // card validation
             const pattern = new RegExp(cardtype['cardPattern'].slice(1, -1));
             if (this.state.number.match(pattern) === null) {
-                if (this.state.type === "") {
+                if (this.state.type === "" && this.state.number.length > 0) {
                     this.setState({
                         numberError: "Not a valid Card Number"
+                    })
+                } else if (this.state.number === "") {
+                    this.setState({
+                        numberError: ""
                     })
                 }
                 continue;
             }
+
             console.log('Pattern matched for ', cardtype['displayText']);
             if (this.state.number.length !== cardtype['cardNumberLength']) continue;
             card = cardtype['displayText'];

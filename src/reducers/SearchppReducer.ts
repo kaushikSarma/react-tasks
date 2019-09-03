@@ -1,47 +1,28 @@
+import { CONST_STORAGE } from "@data/Constants";
+import { Product } from '@data/Product';
+
 class SearchAppState {
     filtersList: {BRAND:{} , COLOR: {}, PRICE:{}} = {
         BRAND: {} , COLOR:{}, PRICE:{}
     };
-    products: {
-        "id": string,
-        "colour"?: {
-            "color": string,
-            "title": string
-        },
-        "brand"?: string,
-        "discount"?: number,
-        "rating"?: number,
-        "image"?: string,
-        "price"?: {
-            "mrp"?: number
-            "final_price"?: number
-        },
-        "title"?: string
-    }[] = [];
+    products: Product[] = [];
 
         
-    constructor({brand, color, price, products = []}: {brand: {}, color: {}, price:{}, products?: {
-        "id": string,
-        "colour"?: {
-            "color": string,
-            "title": string
-        },
-        "brand"?: string,
-        "discount"?: number,
-        "rating"?: number,
-        "image"?: string,
-        "price"?: {
-            "mrp"?: number
-            "final_price"?: number
-        },
-        "title"?: string
-    }[]}) {
+    constructor({brand, color, price, products = []}: {brand: {}, color: {}, price:{}, products?: Product[]}) {
         this.filtersList.BRAND = brand;
         this.filtersList.COLOR = color;
         this.filtersList.PRICE = price;
         this.products = products;
     }
 }
+
+const updateCache = (data) => {
+    let SearchCacheString = JSON.stringify(data);
+    window.localStorage.setItem(
+      CONST_STORAGE.SEARCH_STORAGE,
+      SearchCacheString
+    );
+};
 
 export const SearchAppReducer = (state: SearchAppState = new SearchAppState({
     brand: {}, color: {}, price: {}, products: []
@@ -60,9 +41,10 @@ export const SearchAppReducer = (state: SearchAppState = new SearchAppState({
                 price: action.filterdata.filters.filter(d => d.type === 'PRICE')[0],
                 products: state.products
             });
+            updateCache(newstate);
             return newstate;
         }
-        case "UPDATE_SEARCH_LIST": {
+        case "UPDATE_SEARCH_CATALOG": {
             console.log(action.products);
             const newstate = new SearchAppState({
                 brand: state.filtersList.BRAND,
@@ -70,6 +52,7 @@ export const SearchAppReducer = (state: SearchAppState = new SearchAppState({
                 price: state.filtersList.PRICE,
                 products: action.products
             });
+            updateCache(newstate);
             return newstate;
         }
     }

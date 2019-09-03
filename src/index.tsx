@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import { Provider } from 'react-redux';
+
 import { createStore, combineReducers } from 'redux';
 import { CreditCardsAppReducer } from 'reducers/CreditCardsAppReducer';
 import { SearchAppReducer } from 'reducers/SearchppReducer';
@@ -17,6 +19,11 @@ import './index.scss';
 const RootReducer = combineReducers({ CreditCardsAppReducer, SearchAppReducer });
 const AppStore = createStore(RootReducer);
 
-const render = () => ReactDOM.render(<BrowserRouter basename={process.env.PUBLIC_URL}><App AppStore={AppStore} /></BrowserRouter> , document.getElementById('root'))
-AppStore.subscribe(render);
+const render = () => ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={AppStore}>
+            <App />
+        </Provider>
+    </BrowserRouter> 
+    , document.getElementById('root'))
 render();
