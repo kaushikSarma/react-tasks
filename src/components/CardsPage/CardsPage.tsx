@@ -7,6 +7,8 @@ import CreditCardForm from '@component/CreditCardForm';
 import { connect } from 'react-redux';
 import { CONST_URLS, CONST_STORAGE } from '@data/Constants';
 
+import * as CardActions from '@action/CardActions';
+
 interface CardsPageProps {
     validation: {}
     cards: {
@@ -121,38 +123,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        readCache: (CcCacheState) => {
-            dispatch({
-                type: "READ_CC_CACHE",
-                savedCurrentID: CcCacheState.savedCards.currentCardID,
-                savedCards: CcCacheState.savedCards.cards,
-                savedValidation: CcCacheState.validation
-            });
-        },
-        updateCache: (data) => {
-            dispatch({
-                type: "UPDATE_CC_CONFIG",
-                configdata: data
-            });
-        },
-        addCard: (data) => {
-            dispatch({
-                'type': 'ADD_CARD',
-                'cardData': data
-            });
-        },
-        removeCard: (cardid) => {
-            dispatch({
-                'type': 'REMOVE_CARD',
-                'cardID': cardid
-            });
-        },
-        editCard: (cardData) => {
-            dispatch({
-                'type': 'EDIT_CARD',
-                'cardData': cardData
-            })
-        }
+        readCache: CcCacheState => dispatch(CardActions.readCache(CcCacheState)),
+        updateCache: data => dispatch(CardActions.updateCache(data)),
+        addCard: data => dispatch(CardActions.addCard(data)),
+        removeCard: cardid => dispatch(CardActions.removeCard(cardid)),
+        editCard: cardData => dispatch(CardActions.editCard(cardData)),
     }
 }
 
