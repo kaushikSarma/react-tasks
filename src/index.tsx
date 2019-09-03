@@ -17,6 +17,8 @@ import './index.scss';
 const RootReducer = combineReducers({ CreditCardsAppReducer, SearchAppReducer });
 const AppStore = createStore(RootReducer);
 
-const render = () => ReactDOM.render(<BrowserRouter basename={process.env.PUBLIC_URL}><App AppStore={AppStore} /></BrowserRouter> , document.getElementById('root'))
+// const baseurl = window.location;
+// console.log(baseurl.href);
+const render = () => ReactDOM.render(<BrowserRouter><App AppStore={AppStore} /></BrowserRouter> , document.getElementById('root'))
 AppStore.subscribe(render);
 render();

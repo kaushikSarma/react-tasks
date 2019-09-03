@@ -13,6 +13,8 @@ interface AppProps {
 export default class App extends React.Component<AppProps> {
   constructor(props) {
     super(props);
+  }
+  componentDidMount = () => {
     fetch(CONST_URLS.CCVLAIDATION_URL).then(response => {
       if (response.status !== 200) {
         console.log("Could not load credit card validations config!");
