@@ -162,7 +162,7 @@ export default class SearchFilterPane extends React.Component<
   };
 
   render = () => {
-      console.log(window.innerWidth);
+    console.log(window.innerWidth);
     return (
       <form className="search-filters position-absolute">
         <div className="search-filter-group">
