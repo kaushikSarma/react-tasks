@@ -7,13 +7,32 @@ import CreditCardForm from '@component/CreditCardForm';
 import { connect } from 'react-redux';
 import { CONST_URLS, CONST_STORAGE } from '@data/Constants';
 
+interface CardsPageProps {
+    validation: {}
+    cards: {
+        id?: number;
+        name?: string;
+        number: string;
+        expiryMonth: number;
+        expiryYear: number;
+        cvv: string;
+        type?: string;
+    }[]
+}
+
+interface CardsPageEventHandlers {
+    addCard(data);
+    removeCard(id);
+    editCard(data);
+}
+
 interface CardsPageState {
     AddNew: boolean;
     EditCard: boolean;
     CurrentEditId: number;
 }
 
-class CardsPage extends React.Component {
+class CardsPage extends React.Component <CardsPageProps & CardsPageEventHandlers, CardsPageState> {
     constructor(props) {
         super(props);
         console.log(this.props);
@@ -56,17 +75,17 @@ class CardsPage extends React.Component {
         this.setState({
             AddNew: false
         })
-        this.props['addCard'](data);
+        this.props.addCard(data);
     }
     removeCreditCardById = (id: number) => {
-        this.props['removeCard'](id);
+        this.props.removeCard(id);
     }
     editCard = (data: CreditCard) => {
         this.setState({
             EditCard: false,
             CurrentEditId: undefined
         })
-        this.props['editCard'](data);
+        this.props.editCard(data);
     }
 
     render = () => {
@@ -81,10 +100,10 @@ class CardsPage extends React.Component {
                                             <span className="icon">+</span>Add Card
                                         </div>}
 
-                {this.state['AddNew'] && <CreditCardForm validations={this.props['validation']} submitCard={this.addNewCard} cancel={this.cancelAddCard} />}
+                {this.state['AddNew'] && <CreditCardForm validations={this.props.validation} submitCard={this.addNewCard} cancel={this.cancelAddCard} />}
                 <ul>
-                    {this.props['cards'].map((cardData,index) => { 
-                        if (this.state['EditCard'] && cardData.id === this.state['CurrentEditId']) return <CreditCardForm key={`form-${index}`} validations={this.props['validation']} currentCardDetails={cardData} submitCard={this.editCard} cancel={this.cancelEditCard} />;
+                    {this.props.cards.map((cardData,index) => { 
+                        if (this.state['EditCard'] && cardData.id === this.state['CurrentEditId']) return <CreditCardForm key={`form-${index}`} validations={this.props.validation} currentCardDetails={cardData} submitCard={this.editCard} cancel={this.cancelEditCard} />;
                         return <CreditCardItem key={`ccitem-${index + 1}`} index={index + 1} editCard={() => {this.cancelAddCard(); this.setState({ EditCard: true, CurrentEditId: cardData.id })}} removeCard={this.removeCreditCardById} {...cardData}/>})}
                 </ul>
             </div>
