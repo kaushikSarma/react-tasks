@@ -8,6 +8,9 @@ import { CONST_STORAGE, CONST_URLS } from '@data/Constants';
 
 import './index.scss';
 import { Product } from '@data/Product';
+
+import * as SearchActions from '@action/SearchActions';
+
 interface SearchPageProps {
     searchfilters: {
         BRAND:{type:string, values:{}[] } ,
@@ -116,8 +119,6 @@ class SearchPage extends React.Component<SearchPageProps & SearchPageActions, Se
     }
 
     setFilters = (filters) => {
-        console.log(filters);
-        // let products = [...this.state.sortedProducts];
         const minprice = filters['minprice'] === 'Min' ? 0 : parseInt(filters['minprice']);
         const maxprice = filters['maxprice'] === 'Max' ? Number.MAX_SAFE_INTEGER : parseInt(filters['maxprice']);
         this.setState({
@@ -142,38 +143,15 @@ class SearchPage extends React.Component<SearchPageProps & SearchPageActions, Se
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        searchfilters: state.SearchAppReducer.filtersList,
-        products: state.SearchAppReducer.products
-    }
-}
+const mapStateToProps = state => ({
+    searchfilters: state.SearchAppReducer.filtersList,
+    products: state.SearchAppReducer.products
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        readCache: (CacheState) => {
-            console.log(CacheState);
-            dispatch({
-                type: "READ_SEARCH_CACHE",
-                filterBrand: CacheState.filtersList.BRAND,
-                filterColor: CacheState.filtersList.COLOR,
-                filterPrice: CacheState.filtersList.PRICE,
-                products: CacheState.products === undefined ? [] : CacheState.products
-            });
-        },
-        updateFilters: (data) => {
-            dispatch({
-                type: "UPDATE_SEARCH_FILTERS",
-                filterdata: data
-            });
-        },
-        updateCatalog: (data) => {
-            dispatch({
-                type: "UPDATE_SEARCH_CATALOG",
-                products: data.products
-            });
-        }
-    }
-}
+const mapDispatchToProps = dispatch => ({
+    readCache: (CacheState) => dispatch(SearchActions.readCache(CacheState)),
+    updateFilters: (data) => dispatch(SearchActions.updateFilters(data)),
+    updateCatalog: (data) => dispatch(SearchActions.updateCatalog(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

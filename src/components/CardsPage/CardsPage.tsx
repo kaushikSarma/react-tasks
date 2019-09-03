@@ -7,6 +7,8 @@ import CreditCardForm from '@component/CreditCardForm';
 import { connect } from 'react-redux';
 import { CONST_URLS, CONST_STORAGE } from '@data/Constants';
 
+import * as CardActions from '@action/CardActions';
+
 interface CardsPageProps {
     validation: {}
     cards: {
@@ -111,49 +113,18 @@ class CardsPage extends React.Component <CardsPageProps & CardsPageEventHandlers
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        reducerState: state['CreditCardsAppReducer'],
-        cards: state['CreditCardsAppReducer']['savedCards']['cards'],
-        validation: state['CreditCardsAppReducer']['validation'],
-    }
-}
+const mapStateToProps = (state) => ({
+    reducerState: state['CreditCardsAppReducer'],
+    cards: state['CreditCardsAppReducer']['savedCards']['cards'],
+    validation: state['CreditCardsAppReducer']['validation'],
+});
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        readCache: (CcCacheState) => {
-            dispatch({
-                type: "READ_CC_CACHE",
-                savedCurrentID: CcCacheState.savedCards.currentCardID,
-                savedCards: CcCacheState.savedCards.cards,
-                savedValidation: CcCacheState.validation
-            });
-        },
-        updateCache: (data) => {
-            dispatch({
-                type: "UPDATE_CC_CONFIG",
-                configdata: data
-            });
-        },
-        addCard: (data) => {
-            dispatch({
-                'type': 'ADD_CARD',
-                'cardData': data
-            });
-        },
-        removeCard: (cardid) => {
-            dispatch({
-                'type': 'REMOVE_CARD',
-                'cardID': cardid
-            });
-        },
-        editCard: (cardData) => {
-            dispatch({
-                'type': 'EDIT_CARD',
-                'cardData': cardData
-            })
-        }
-    }
-}
+const mapDispatchToProps = (dispatch) => ({
+    readCache: CcCacheState => dispatch(CardActions.readCache(CcCacheState)),
+    updateCache: data => dispatch(CardActions.updateCache(data)),
+    addCard: data => dispatch(CardActions.addCard(data)),
+    removeCard: cardid => dispatch(CardActions.removeCard(cardid)),
+    editCard: cardData => dispatch(CardActions.editCard(cardData)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage);

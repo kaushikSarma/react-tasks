@@ -16,25 +16,13 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <Header />
+        <div className="mainContent">
         <Switch>
-          <Route
-            path={"/search"}
-            render={() => (
-              <div className="mainContent">
-                <SearchPage />
-              </div>
-            )}
-          ></Route>
-          <Route
-            path={"/manage-cards"}
-            render={() => (
-              <div className="mainContent">
-                <CardsPage />
-              </div>
-            )}
-          ></Route>
+          <Route path={"/search"} render={() => <SearchPage />}/>
+          <Route path={"/manage-cards"} render={() => <CardsPage />} />
           <Redirect from="/" to="/manage-cards"></Redirect>
         </Switch>
+        </div>
       </React.Fragment>
     );
   };
