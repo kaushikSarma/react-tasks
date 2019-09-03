@@ -1,25 +1,26 @@
 import * as React from "react";
 
 import './index.scss';
+import { Product } from "@data/Product";
 
 interface ProductItemProps {
-    "id"?: string,
-    "colour"?: {
-        "color": string,
-        "title": string
-    },
-    "brand"?: string,
-    "discount"?: number,
-    "rating"?: number,
-    "image"?: string,
-    "price"?: {
-        "mrp"?: number
-        "final_price"?: number
-    },
-    "title"?: string
+    // "id"?: string,
+    // "colour"?: {
+    //     "color": string,
+    //     "title": string
+    // },
+    // "brand"?: string,
+    // "discount"?: number,
+    // "rating"?: number,
+    // "image"?: string,
+    // "price"?: {
+    //     "mrp"?: number
+    //     "final_price"?: number
+    // },
+    // "title"?: string
 }
 
-export default class ProductItem extends React.Component<ProductItemProps> {
+export default class ProductItem extends React.Component<ProductItemProps & Product> {
     discount = (mrp, final_price) => Math.floor(100*(mrp - final_price)/mrp);
     render = () => {
         const hasDiscount = this.props.price.mrp !== undefined && !isNaN(this.props.price.mrp);

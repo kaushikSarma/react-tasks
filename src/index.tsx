@@ -22,9 +22,8 @@ const AppStore = createStore(RootReducer);
 const render = () => ReactDOM.render(
     <BrowserRouter>
         <Provider store={AppStore}>
-            <App AppStore={AppStore} />\
+            <App />
         </Provider>
     </BrowserRouter> 
     , document.getElementById('root'))
-AppStore.subscribe(render);
 render();
