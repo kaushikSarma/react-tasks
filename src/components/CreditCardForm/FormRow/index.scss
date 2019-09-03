@@ -66,4 +66,7 @@ div.row {
     div.dateField {
         padding-left: 20px;
     }
+    @media screen and (max-width: 876px) {
+        display: block;
+    }
 }

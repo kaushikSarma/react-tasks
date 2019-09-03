@@ -61,4 +61,20 @@ div.product-item {
             transform: scale(1.1);
         }
     }
+    @media screen and (max-width: 876px) {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0;
+        margin-top: 10px;
+        div.image-container {
+            flex-basis: 20%;
+            height: auto;
+        }
+        div.product-desc {
+            padding-left: 10px;
+            flex-basis: 80%;
+        }
+    }
 }

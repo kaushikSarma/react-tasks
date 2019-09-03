@@ -6,4 +6,9 @@ div.search-page-wrapper {
     text-align: left;
     overflow: hidden;
     background: var(--secondary-outline);
+    
+    @media screen and (max-width: 876px) {
+        display: block;        
+        height: auto;
+    }
 }
