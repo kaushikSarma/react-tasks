@@ -3,7 +3,6 @@ import * as React from 'react';
 import './index.scss';
 import SearchFilterPane from '@component/SearchFiltersPane';
 import SearchContent from '@component/SearchContent';
-
 interface SearchPageProps {
     searchfilters:{
         BRAND:{type:string, values:{}[] } ,
@@ -20,6 +19,10 @@ interface SearchPageState {
     maxprice: number;
     brand: string;
     colors: {}[];
+}
+
+const mapStateToProps = (state) => {
+
 }
 
 export default class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
@@ -93,8 +96,8 @@ export default class SearchPage extends React.Component<SearchPageProps, SearchP
 
     render = () => {
         return <div className="search-page-wrapper">
-            <SearchFilterPane filters={this.props.searchfilters} setFilters={this.setFilters}></SearchFilterPane>
-            <SearchContent searchQuery={window.location.search.slice(1)} sort={this.sort} filtersList={this.props.searchfilters} products={this.state.sortedProducts}></SearchContent>
+            <SearchFilterPane filters={this.props.searchfilters} setFilters={this.setFilters} />
+            <SearchContent searchQuery={window.location.search.slice(1)} sort={this.sort} filtersList={this.props.searchfilters} products={this.state.sortedProducts} />
         </div>
     }
 }

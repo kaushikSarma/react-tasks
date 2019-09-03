@@ -1,5 +1,6 @@
 import CreditCard from "@data/CreditCard";
 import CreditCardList from "@data/CreditCardList";
+import { CONST_STORAGE } from "@data/Constants";
 
 // Section containing reducer and state for Credit Cards
 class CreditCardsAppState {
@@ -10,6 +11,14 @@ class CreditCardsAppState {
         this.validation = validation;
     }
 }
+
+const updateCache = (data) => {
+    let CreditCardCacheString = JSON.stringify(data);
+    window.localStorage.setItem(
+      CONST_STORAGE.CC_STORAGE,
+      CreditCardCacheString
+    );
+};
 
 export const CreditCardsAppReducer = (state: CreditCardsAppState = new CreditCardsAppState(
     new CreditCardList(0), {} 
@@ -27,13 +36,15 @@ export const CreditCardsAppReducer = (state: CreditCardsAppState = new CreditCar
                                 ...state.savedCards.getCards(),
                                 new CreditCard(
                                     action.cardData
-                                )), state.validation)
+                                )), state.validation);
+            updateCache(newstate);
             return newstate;
         }
         case 'REMOVE_CARD': {
             console.log(action.cardID);
             const newstate = new CreditCardsAppState(new CreditCardList(state.savedCards.getCurrentCardID(), 
                                 ...state.savedCards.getCards().filter(card => card.id !== action.cardID)), state.validation);
+            updateCache(newstate);
             return newstate;
         }
         case 'EDIT_CARD': {
@@ -46,12 +57,14 @@ export const CreditCardsAppReducer = (state: CreditCardsAppState = new CreditCar
                 cards[index] = new CreditCard(action.cardData);
                 let updateList = new CreditCardList(state.savedCards.getCurrentCardID(), ...cards);
                 const newstate = new CreditCardsAppState(updateList, state.validation);
+                updateCache(newstate);
                 return newstate;
             } else return state;
         }
         case 'UPDATE_CC_CONFIG': {
             const newstate = new CreditCardsAppState(state.savedCards, action.configdata);
-            console.log('Updating Credit card data with ', newstate);
+            console.log('Updating validation config ', newstate);
+            updateCache(newstate);
             return newstate;
         }
         default: return state;
