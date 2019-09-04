@@ -61,15 +61,23 @@ export default class CreditCardForm extends React.Component<CreditCardFormProps,
             case 'expiryMonth': this.setState({ expiryMonth: isNaN(parseInt(value)) ? 0 : parseInt(value) }); break;
             case 'expiryYear': this.setState({ expiryYear: isNaN(parseInt(value)) ? 0 : parseInt(value) }); break;
             case 'cvv': 
-                console.log(event);
                 if(value !== '' && isNaN(parseInt(value.substr(-1)))) {
                     value = this.state.cvv;
+                    console.log('Invalid char');
+                    this.setState({
+                        cvvError: 'Invalid character input!'
+                    })
                 } else if (value.length > this.state.cvv.length && this.state.type !== "" && this.state.cvv.length === Object.values(this.props.validations).find(c => c['displayText'] === this.state.type)['cvvLength']) {
                     console.log("CVV length", Object.values(this.props.validations).find(c => c['displayText'] === this.state.type)['cvvLength'])
                     value = this.state.cvv;
+                    console.log('Length reached');
+
+                    this.setState({
+                        cvvError: 'Already reached required length'
+                    })
                 } 
                 else {
-                    this.setState({ cvv: value }, this.checkValidityConfig );
+                    this.setState({ cvv: value , cvvError: ''}, this.checkValidityConfig );
                 } 
                 break;
             default: break;
@@ -190,6 +198,7 @@ export default class CreditCardForm extends React.Component<CreditCardFormProps,
                 <FormRow>
                     <div className='inputField'>
                         <input onChange={this.handleChange} name="cvv" type="password" placeholder="CVV" maxLength={10} value={this.state['cvv']}/>
+                        { this.state.cvvError === "" ? null : <p className="errorDialog">{this.state.cvvError}</p>}
                     </div>
                     <div className='inputField'>
                         <input onChange={this.handleChange} name="name" type="text" placeholder="Name this Card for future use" value={this.state['name']}/>
