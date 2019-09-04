@@ -2,7 +2,7 @@ export const readCache = (CcCacheState) => ({
     type: "READ_CC_CACHE",
     savedCurrentID: CcCacheState.savedCards.currentCardID,
     savedCards: CcCacheState.savedCards.cards,
-    savedValidation: CcCacheState.validationS
+    savedValidation: CcCacheState.validation
 });
 
 export const updateCache = (data) => ({

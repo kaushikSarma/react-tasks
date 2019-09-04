@@ -49,14 +49,14 @@ class CardsPage extends React.Component <CardsPageProps & CardsPageEventHandlers
     }
 
     componentDidMount = () => {
+        let CcCacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.CC_STORAGE));
+        if (CcCacheState !== null && CcCacheState.savedCards !== undefined) {
+            this.props.readCache(CcCacheState);
+        }
         fetch(CONST_URLS.CCVLAIDATION_URL).then(response => {
             if (response.status !== 200) {
                 console.log("Could not load credit card validations config!");
                 return;
-            }
-            let CcCacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.CC_STORAGE));
-            if (CcCacheState !== null && CcCacheState.savedCards !== undefined) {
-                this.props.readCache(CcCacheState);
             }
             response.json().then(data => {
                 this.props.updateCache(data)

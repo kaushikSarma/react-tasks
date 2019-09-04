@@ -25,7 +25,7 @@ export const CreditCardsAppReducer = (state: CreditCardsAppState = new CreditCar
 ), action) => {
     switch(action.type) {
         case 'READ_CC_CACHE': {
-            console.log('data from cache', action.savedCards);
+            console.log('data from cache', action.savedCards, action.savedValidation);
             const newstate = new CreditCardsAppState(new CreditCardList(action.savedCurrentID,
                                 ...action.savedCards), action.savedValidation);
             return newstate;

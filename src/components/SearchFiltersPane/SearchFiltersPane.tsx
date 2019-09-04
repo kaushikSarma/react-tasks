@@ -2,13 +2,16 @@ import * as React from "react";
 import * as SearchActions from "@action/SearchActions";
 import { connect } from "react-redux";
 import "./index.scss";
-import { CONST_STORAGE, CONST_URLS } from "@data/Constants";
+import { CONST_URLS } from "@data/Constants";
+import FormInput from "@component/FormInput";
+import FormRangeInput from "@component/FormRangeInput";
+import FormMultiCheckBoxInput from "@component/FormMultiCheckBoxInput";
 
 interface SearchFilterProps {
   filters: {
     BRAND: { type: string; values: {}[] };
     COLOR: { type: string; values: {}[] };
-    PRICE: { type: string; values: {}[] };
+    PRICE: { type: string; values: {key: string, displayValue: string}[] };
   };
   setFilters(filters);
 }
@@ -51,7 +54,15 @@ class SearchFilterPane extends React.Component<
   
     return JSON.stringify(obj) === JSON.stringify({});
   }
-
+  exists(object) {
+    return (
+      object !== null &&
+      object !== undefined &&
+      object !== {} &&
+      object.length > 0
+    );
+  }
+  
   componentDidMount = () => {
     console.log(this.props.readCache());
     this.props.readCache();
@@ -70,14 +81,6 @@ class SearchFilterPane extends React.Component<
     }
   };
 
-  exists(object) {
-    return (
-      object !== null &&
-      object !== undefined &&
-      object !== {} &&
-      object.length > 0
-    );
-  }
   getNumColors = (): number => {
     if (
       this.exists(this.props.filters.COLOR) &&
@@ -94,6 +97,7 @@ class SearchFilterPane extends React.Component<
 
   updateFilters = event => {
     const name = event.target.name;
+    console.log(name);
     const val =
       event.target.type === "checkbox"
         ? event.target.checked
@@ -171,65 +175,33 @@ class SearchFilterPane extends React.Component<
           <h3>Filters</h3>
         </div>
         <div className="search-filter-group">
-          <h4>Price</h4>
-          <select
-            name="minprice"
-            value={this.state.minprice}
+          <FormRangeInput
+            title="Price"
+            type="range-select"
+            name={{min: "minprice", max:"maxprice"}}
+            value={{min: this.state.minprice, max: this.state.maxprice}}
+            rangeofvaleus={this.props.filters.PRICE.values}
             onChange={this.updateFilters}
-          >
-            {this.props.filters.PRICE.values !== undefined &&
-              this.props.filters.PRICE.values.map(value => (
-                <option key={`min-${value["key"]}`} value={value["key"]}>
-                  {value["displayValue"]}
-                </option>
-              ))}
-          </select>
-          <i className="separator">to</i>
-          <select
-            name="maxprice"
-            value={this.state.maxprice}
-            onChange={this.updateFilters}
-          >
-            {this.props.filters.PRICE.values !== undefined &&
-              this.props.filters.PRICE.values.map(value => (
-                <option key={`max-${value["key"]}`} value={value["key"]}>
-                  {value["displayValue"]}
-                </option>
-              ))}
-          </select>
+          />
         </div>
         <div className="search-filter-group">
-          <h4>Brand</h4>
-          <input
+          <FormInput 
+            title="Brand"
             type="text"
             name="brand"
             placeholder="Search Brand"
             onChange={this.updateFilters}
             value={this.state.brand}
-          ></input>
+          />
         </div>
         <div className="search-filter-group">
-          <h4>Color</h4>
-          {this.exists(this.props.filters.COLOR.values) &&
-            this.props.filters.COLOR.values.map((choice, index) => {
-              return (
-                <div key={`color-${choice["title"]}`} className="color-input">
-                  <input
-                    type="checkbox"
-                    name="colorChoices"
-                    onChange={this.updateFilters}
-                    data-index={index}
-                    checked={this.state.colors[index]}
-                  ></input>
-                  <span
-                    className="color-display-bubble"
-                    style={{ background: choice["color"] }}
-                  ></span>
-                  <label>{choice["title"]}</label>
-                </div>
-              );
-            })}
-          <br />
+          <FormMultiCheckBoxInput 
+            value={this.state.colors}
+            valueslist={this.props.filters.COLOR.values}
+            onChange={this.updateFilters}
+            title="Colors"
+          />
+        <br />
         </div>
       </form>
     );

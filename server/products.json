@@ -1,0 +1,638 @@
+{
+    "products": [
+        {
+            "id": "SHOEWPCWKQJFGDBQ",
+            "colour": {
+                "color": "#00AF33",
+                "title": "Green"
+            },
+            "brand": "peter england pe",
+            "discount": 0,
+            "rating": 3.8,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j752nww0/shoe/h/5/e/1055-8-provogue-royal-blue-original-imaexgcfmfghaf8f.jpeg?q=70",
+            "price": {
+                "final_price": 2399
+            },
+            "title": "Provogue Running Shoes For Men"
+        },
+        {
+            "id": "SHOEZURHKVX24H8P",
+            "colour": {
+                "color": "#33A1DE",
+                "title": "Blue"
+            },
+            "brand": "znopy",
+            "discount": 10,
+            "rating": 4.3,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jao8uq80/shoe/3/r/q/sm323-9-sparx-white-original-imaezvxwmp6qz6tg.jpeg?q=70",
+            "price": {
+                "final_price": 749
+            },
+            "title": "Sparx SD0323G Canvas Shoes For Men"
+        },
+        {
+            "id": "SHOERHTCZRH8YGMW",
+            "colour": {
+                "color": "#FFD700",
+                "title": "Gold"
+            },
+            "brand": "gowell",
+            "discount": 50,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/shoe/2/p/r/ar4697-414-8-lotto-414-original-imaes9ebjqy4g8cn.jpeg?q=70",
+            "price": {
+                "mrp": 2299,
+                "final_price": 1149
+            },
+            "title": "Lotto Running Shoes For Men"
+        },
+        {
+            "id": "SHOF23SGG6KG5KXK",
+            "colour": {
+                "color": "#292421",
+                "title": "Black"
+            },
+            "brand": "twin",
+            "discount": 54,
+            "rating": 4.2,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jepzrm80/shoe/7/f/h/nm005-8-provogue-black-original-imaf3chbxgtdkhfv.jpeg?q=70",
+            "price": {
+                "mrp": 1699,
+                "final_price": 769
+            },
+            "title": "Provogue FCS-005 Canvas Shoes For Men"
+        },
+        {
+            "id": "SHOEQDTHFC8CAYWY",
+            "colour": {
+                "color": "#B87333",
+                "title": "Copper"
+            },
+            "brand": "holysin",
+            "discount": 50,
+            "rating": 4.4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/shoe/y/w/y/vn0002gprvn1-9-vans-black-formula-one-checkerboard-original-imaes6y8fsbbqqfc.jpeg?q=70",
+            "price": {
+                "mrp": 2999,
+                "final_price": 1499
+            },
+            "title": "Vans CLASSIC SLIP-ON Loafers For Men"
+        },
+        {
+            "id": "SHOFFBZ8BY5RKRAN",
+            "colour": {
+                "color": "#5C3317",
+                "title": "Brown"
+            },
+            "brand": "foxzy",
+            "discount": 45,
+            "rating": 4.4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jerf7gw0/shoe/a/u/z/run-dashride-xtreme-ss18-8-reebok-navy-neon-gren-original-imaf3dd3zaysmgag.jpeg?q=70",
+            "price": {
+                "mrp": 3999,
+                "final_price": 2199
+            },
+            "title": "REEBOK RUN DASHRIDE XTREME Running Shoes For Men"
+        },
+        {
+            "id": "SHOF2YU6JEHCSHJH",
+            "colour": {
+                "color": "#5C3317",
+                "title": "Brown"
+            },
+            "brand": "finery",
+            "discount": 0,
+            "rating": 3.4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jd0jtzk0/shoe/6/z/d/af-103-10-andrew-scott-brown-original-imaf2ywnvj7s6n5y.jpeg?q=70",
+            "price": {
+                "final_price": 499
+            },
+            "title": "Andrew Scott High Grade PU Loafers For Men"
+        },
+        {
+            "id": "SHOEXP7YXBFDNPDB",
+            "colour": {
+                "color": "#8C7853",
+                "title": "Bronze"
+            },
+            "brand": "scarpia",
+            "discount": 65,
+            "rating": 3.9,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j7z2wsw0/shoe/y/g/x/ca4050-9-kraasa-beige-original-imaexqtch3fwwjt5.jpeg?q=70",
+            "price": {
+                "mrp": 1299,
+                "final_price": 499
+            },
+            "title": "Kraasa The Rock Boots For Men"
+        },
+        {
+            "id": "SHOF2WTUQMH6MJDB",
+            "colour": {
+                "color": "#B87333",
+                "title": "Copper"
+            },
+            "brand": "adreno",
+            "discount": 30,
+            "rating": 3.8,
+            "image": "https://rukminim1.flixcart.com/image/312/312/je5zlow0/shoe/h/u/y/c-s-1aor-6-glizt-orange-original-imaf2xfdey8fg6uh.jpeg?q=70",
+            "price": {
+                "mrp": 999,
+                "final_price": 699
+            },
+            "title": "Glizt Running Shoes For Men"
+        },
+        {
+            "id": "SHOEVQTQYJZRSXCP",
+            "colour": {
+                "color": "#800000",
+                "title": "Maroon"
+            },
+            "brand": "black macy",
+            "discount": 55,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j5mrxjk0/shoe/6/s/y/vertigo-8-lotto-10-original-imaewa2sjfnjh6up.jpeg?q=70",
+            "price": {
+                "mrp": 2499,
+                "final_price": 1119
+            },
+            "title": "Lotto VERTIGO Running Shoes For Men"
+        },
+        {
+            "id": "SHOF23SGQNPFFSNC",
+            "colour": {
+                "color": "#900020",
+                "title": "Burgundy"
+            },
+            "brand": "marathon",
+            "discount": 54,
+            "rating": 4.2,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jepzrm80/shoe/k/r/5/nm005-8-provogue-aqua-original-imaf3chbsddrrj9x.jpeg?q=70",
+            "price": {
+                "mrp": 1699,
+                "final_price": 769
+            },
+            "title": "Provogue FCS-005 Canvas Shoes For Men"
+        },
+        {
+            "id": "SHOF3FDYS9CKEGRX",
+            "colour": {
+                "color": "#FFD700",
+                "title": "Gold"
+            },
+            "brand": "trv",
+            "discount": 54,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jebpd3k0/shoe/x/t/d/multicolor-combo-2-678-698-7-shoefly-multicolor-original-imaf3ffcguxggfed.jpeg?q=70",
+            "price": {
+                "mrp": 998,
+                "final_price": 509
+            },
+            "title": "Axter Multicolor Combo-(2)-678-698 Casuals For Men"
+        },
+        {
+            "id": "SHOEXYCZYZQN9ZPD",
+            "colour": {
+                "color": "#292421",
+                "title": "Black"
+            },
+            "brand": "fine arch",
+            "discount": 46,
+            "rating": 3.8,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j7usl8w0/shoe/z/p/d/5002-7-footstair-blue-white-original-imaexxv8f3zwg2zj.jpeg?q=70",
+            "price": {
+                "mrp": 498,
+                "final_price": 299
+            },
+            "title": "FOOTSTAIR Loafers For Men"
+        },
+        {
+            "id": "SHOFFBZ7YGFNRGHQ",
+            "colour": {
+                "color": "#5C3317",
+                "title": "Brown"
+            },
+            "brand": "kaption",
+            "discount": 45,
+            "rating": 4.1,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jerf7gw0/shoe/m/n/h/smooth-flyer-xtreme-ss18-8-reebok-black-cool-shadow-green-original-imaf3dd2hbrhz7rn.jpeg?q=70",
+            "price": {
+                "mrp": 3999,
+                "final_price": 2199
+            },
+            "title": "REEBOK SMOOTH FLYER XTREME Running Shoes For Men"
+        },
+        {
+            "id": "SHOF2P2CHMUPMNXT",
+            "colour": {
+                "color": "#8C7853",
+                "title": "Bronze"
+            },
+            "brand": "north star",
+            "discount": 25,
+            "rating": 4.1,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jeua3680/shoe/g/8/b/gc-1869115-42-woodland-navy-original-imaf3fh7g8ndqfhr.jpeg?q=70",
+            "price": {
+                "mrp": 3995,
+                "final_price": 2989
+            },
+            "title": "Woodland Casuals For Men"
+        },
+        {
+            "id": "SHOEV3GGHHVRMRR8",
+            "colour": {
+                "color": "#F0E68C",
+                "title": "Khaki"
+            },
+            "brand": "blue tag",
+            "discount": 25,
+            "rating": 3.9,
+            "image": "https://rukminim1.flixcart.com/image/312/312/shoe/h/r/g/brown-laser-bata-8-original-imaebttmtbj5jpqh.jpeg?q=70",
+            "price": {
+                "mrp": 1499,
+                "final_price": 1119
+            },
+            "title": "Bata LASER Slip On Shoes For Men"
+        },
+        {
+            "id": "SHOFFBZ7F2GCZBUK",
+            "colour": {
+                "color": "#787878",
+                "title": "Grey"
+            },
+            "brand": "mbh",
+            "discount": 45,
+            "rating": 4.4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jerf7gw0/shoe/n/k/8/turbo-xtreme-ss18-8-reebok-gravel-black-yellow-wht-original-imaf3dd4z9py8a9e.jpeg?q=70",
+            "price": {
+                "mrp": 3299,
+                "final_price": 1809
+            },
+            "title": "REEBOK Turbo Xtreme Running Shoes For Men"
+        },
+        {
+            "id": "SHOEVMGG8BZS423C",
+            "colour": {
+                "color": "#33A1DE",
+                "title": "Blue"
+            },
+            "brand": "elano",
+            "discount": 35,
+            "rating": 4.4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jb5e4y80/shoe/k/b/r/path-cross-mid-8-adidas-cblack-silvmt-dkgrey-gref-original-imafykfrthwz6tss.jpeg?q=70",
+            "price": {
+                "mrp": 7599,
+                "final_price": 4939
+            },
+            "title": "ADIDAS PATH CROSS MID Outdoor Shoes For Men"
+        },
+        {
+            "id": "SHOEMGJVRNAQNPAA",
+            "colour": {
+                "color": "#8C7853",
+                "title": "Bronze"
+            },
+            "brand": "globia",
+            "discount": 73,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/shoe/m/q/r/puma-black-high-risk-red-elara-slip-on-idp-puma-9-original-imaepwymg89awkhb.jpeg?q=70",
+            "price": {
+                "mrp": 3299,
+                "final_price": 989
+            },
+            "title": "Puma Elara Slip On IDP Sneakers For Men"
+        },
+        {
+            "id": "SHOF27CK3RZTJTTV",
+            "colour": {
+                "color": "#F5F5DC",
+                "title": "Beige"
+            },
+            "brand": "rohyt",
+            "discount": 0,
+            "rating": 3.9,
+            "image": "https://rukminim1.flixcart.com/image/312/312/je7f1jk0/shoe/v/x/w/c-s-1bbl-8-glizt-blue-original-imaf2gckvzue3zfc.jpeg?q=70",
+            "price": {
+                "final_price": 499
+            },
+            "title": "Glizt Running Shoes For Men"
+        },
+        {
+            "id": "SHOF2F7QSNBZR4HJ",
+            "colour": {
+                "color": "#787878",
+                "title": "Grey"
+            },
+            "brand": "opner",
+            "discount": 0,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jdj4k280/shoe/4/h/j/7702-black-10-zapatoz-black-original-imaf2fa6j6bkcx8r.jpeg?q=70",
+            "price": {
+                "final_price": 499
+            },
+            "title": "Zapatoz Patent Leather Formal Slip On For Patent Leather Formal Lace-Up For Men (Black) Lace Up For Men"
+        },
+        {
+            "id": "SHOEVMGGVSZVCM6Z",
+            "colour": {
+                "color": "#800000",
+                "title": "Maroon"
+            },
+            "brand": "bond street",
+            "discount": 35,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j9it30w0/shoe/p/g/a/tread-fast-9-reebok-black-pewter-original-imaez8nvhduhnuft.jpeg?q=70",
+            "price": {
+                "mrp": 2499,
+                "final_price": 1619
+            },
+            "title": "REEBOK TREAD FAST Running Shoes For Men"
+        },
+        {
+            "id": "SHOEVMGF7VRRZRMZ",
+            "colour": {
+                "color": "#00AF33",
+                "title": "Green"
+            },
+            "brand": "wave walk",
+            "discount": 40,
+            "rating": 4.3,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j63x7rk0/shoe/a/q/y/vs-set-mid-8-adidas-neo-cblack-ftwwht-cblack-original-imaewn69f5tuq6yk.jpeg?q=70",
+            "price": {
+                "mrp": 3999,
+                "final_price": 2399
+            },
+            "title": "ADIDAS NEO VS SET MID Tennis Shoes For Men"
+        },
+        {
+            "id": "SHOEVXU7D4DMFNAH",
+            "colour": {
+                "color": "#5C3317",
+                "title": "Brown"
+            },
+            "brand": "fly india",
+            "discount": 55,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jb2j98w0/shoe/m/y/j/fabian-nw1-8-puma-quite-shadecherry-tomatowhite-original-imafyg9gz5uhtp62.jpeg?q=70",
+            "price": {
+                "mrp": 4999,
+                "final_price": 2499
+            },
+            "title": "Puma Fabian Running Shoes For Men"
+        },
+        {
+            "id": "SHOEZGEWCZVAKYHQ",
+            "colour": {
+                "color": "#292421",
+                "title": "Black"
+            },
+            "brand": "zekonis",
+            "discount": 20,
+            "rating": 4.3,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jb3yp3k0/shoe/4/j/g/shb35ex-9-yonex-black-blue-original-imafyh48enjqfwpe.jpeg?q=70",
+            "price": {
+                "mrp": 3150,
+                "final_price": 2519
+            },
+            "title": "Yonex SHB35EX Badminton Shoes For Men"
+        },
+        {
+            "id": "SHOFYQXANQZQWN4V",
+            "colour": {
+                "color": "#787878",
+                "title": "Grey"
+            },
+            "brand": "action campus",
+            "discount": 40,
+            "rating": 0,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jeua3680/shoe/w/2/2/lc2313-43-0-lee-cooper-brown-original-imaf3fhjbggypffz.jpeg?q=70",
+            "price": {
+                "mrp": 3699,
+                "final_price": 2219
+            },
+            "title": "Lee Cooper LC2313 Corporate Casuals For Men"
+        },
+        {
+            "id": "SHOFFFC8SZY39H7H",
+            "colour": {
+                "color": "#5C3317",
+                "title": "Brown"
+            },
+            "brand": "toms",
+            "discount": 65,
+            "rating": 4.2,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jc9egsw0/shoe/h/7/h/rte028-11-red-tape-black-original-imaffffey7meemzy.jpeg?q=70",
+            "price": {
+                "mrp": 4195,
+                "final_price": 1467
+            },
+            "title": "Red Tape Men Leather Derby For Men"
+        },
+        {
+            "id": "SHOFY66NET6JQFZW",
+            "colour": {
+                "color": "#F0E68C",
+                "title": "Khaki"
+            },
+            "brand": "united colors of benetton",
+            "discount": 2,
+            "rating": 3.8,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jave1zk0/shoe/m/3/j/u2s-a-boot-11-u2-sneakers-blue-original-imafy64egq8pz5yk.jpeg?q=70",
+            "price": {
+                "mrp": 499,
+                "final_price": 485
+            },
+            "title": "U2 Sneakers Men's Blue Casual Shoes Sneakers For Men"
+        },
+        {
+            "id": "SHOFFBZ7TJF7ZCVG",
+            "colour": {
+                "color": "#292421",
+                "title": "Black"
+            },
+            "brand": "columbus",
+            "discount": 0,
+            "rating": 4.6,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jerf7gw0/shoe/u/m/f/sprint-affect-xtreme-ss18-9-reebok-indigo-sndstone-red-original-imaf3ddfpdzwf6wk.jpeg?q=70",
+            "price": {
+                "final_price": 2999
+            },
+            "title": "REEBOK SPRINT AFFECT XTREME Running Shoes For Men"
+        },
+        {
+            "id": "SHOFY5C9TQZYWRQA",
+            "colour": {
+                "color": "#8C7853",
+                "title": "Bronze"
+            },
+            "brand": "axter",
+            "discount": 2,
+            "rating": 3.8,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jao8uq80/shoe/r/q/a/u2s-a-boot-9-u2-sneakers-white-original-imafy5rfpm3adyzm.jpeg?q=70",
+            "price": {
+                "mrp": 499,
+                "final_price": 485
+            },
+            "title": "U2 Sneakers Men's White Casual Shoes Sneakers For Men"
+        },
+        {
+            "id": "SHOE5RZ9CYNGF3GK",
+            "colour": {
+                "color": "#00AF33",
+                "title": "Green"
+            },
+            "brand": "baaz",
+            "discount": 61,
+            "rating": 3.5,
+            "image": "https://rukminim1.flixcart.com/image/312/312/shoe/a/q/k/blue-as114as115-andrew-scott-9-original-imae5z2cudbqsksp.jpeg?q=70",
+            "price": {
+                "mrp": 1599,
+                "final_price": 689
+            },
+            "title": "Andrew Scott AS114 Sneakers For Men"
+        },
+        {
+            "id": "SHOEVMGGBVGDQPCG",
+            "colour": {
+                "color": "#800000",
+                "title": "Maroon"
+            },
+            "brand": "devoir",
+            "discount": 35,
+            "rating": 4.2,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j9it30w0/shoe/k/p/z/explore-run-9-reebok-drk-root-flash-slvr-wht-original-imaez8ps4ks9a84t.jpeg?q=70",
+            "price": {
+                "mrp": 2599,
+                "final_price": 1689
+            },
+            "title": "REEBOK EXPLORE RUN Running Shoes For Men"
+        },
+        {
+            "id": "SHOEHGZ7KXHXHSTY",
+            "colour": {
+                "color": "#F0E68C",
+                "title": "Khaki"
+            },
+            "brand": "fuzone amco",
+            "discount": 73,
+            "rating": 4.1,
+            "image": "https://rukminim1.flixcart.com/image/312/312/shoe/y/h/f/electric-blue-lemonade-mazarine-blue-carme-mid-idp-puma-6-original-imaemphdzydjtynb.jpeg?q=70",
+            "price": {
+                "mrp": 4499,
+                "final_price": 1349
+            },
+            "title": "Puma Carme Mid IDP Sneakers For Men"
+        },
+        {
+            "id": "SHOFFBZ7ZGCZZWTG",
+            "colour": {
+                "color": "#5C3317",
+                "title": "Brown"
+            },
+            "brand": "cougar",
+            "discount": 47,
+            "rating": 3.7,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jfbfde80/shoe/g/w/d/fuel-race-xtreme-ss18-9-reebok-gravel-nacho-original-imaf3stnvhzfds6g.jpeg?q=70",
+            "price": {
+                "mrp": 3599,
+                "final_price": 1889
+            },
+            "title": "REEBOK FUEL RACE XTREME Running Shoes For Men"
+        },
+        {
+            "id": "SHOFFU4FHW7MFDFX",
+            "colour": {
+                "color": "#787878",
+                "title": "Grey"
+            },
+            "brand": "roony",
+            "discount": 17,
+            "rating": 3.7,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jctemq80/shoe/n/x/k/dangal-navy-blue-8-clymb-blue-original-imaffvy9jtmqshs9.jpeg?q=70",
+            "price": {
+                "mrp": 499,
+                "final_price": 459
+            },
+            "title": "Clymb Men's Dangal Navy Blue Casual Sports Running Shoes For Men"
+        },
+        {
+            "id": "SHOFFBZ7GRPKUQ4Q",
+            "colour": {
+                "color": "#900020",
+                "title": "Burgundy"
+            },
+            "brand": "montiano",
+            "discount": 45,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jerf7gw0/shoe/q/4/q/edge-quick-extreme-ss18-9-reebok-gravel-neon-yellow-original-imaf3dd2f5dudmg5.jpeg?q=70",
+            "price": {
+                "mrp": 3799,
+                "final_price": 2089
+            },
+            "title": "REEBOK EDGE QUICK EXTREME Running Shoes For Men"
+        },
+        {
+            "id": "SHOFFF6ZTSYMXH2C",
+            "colour": {
+                "color": "#5C3317",
+                "title": "Brown"
+            },
+            "brand": "kwellin",
+            "discount": 45,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jeokbrk0/shoe/t/k/g/helkin-3-m-ss18-9-adidas-grnnit-silvmt-cblack-original-imaf3bb9nhnhsr53.jpeg?q=70",
+            "price": {
+                "mrp": 4299,
+                "final_price": 2359
+            },
+            "title": "ADIDAS HELKIN 3 M Running Shoes For Men"
+        },
+        {
+            "id": "SHOERHTCXGK8PFCP",
+            "colour": {
+                "color": "#FFD700",
+                "title": "Gold"
+            },
+            "brand": "camro",
+            "discount": 55,
+            "rating": 4.1,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j29bi4w0/shoe/6/j/h/ar4697-060-9-lotto-60-original-imaetnqckaftkxyh.jpeg?q=70",
+            "price": {
+                "mrp": 2299,
+                "final_price": 1029
+            },
+            "title": "Lotto Running Shoes For Men"
+        },
+        {
+            "id": "SHOEVQTQGABVDMFV",
+            "colour": {
+                "color": "#B87333",
+                "title": "Copper"
+            },
+            "brand": "dream like",
+            "discount": 55,
+            "rating": 4,
+            "image": "https://rukminim1.flixcart.com/image/312/312/j5mrxjk0/shoe/z/a/h/vertigo-7-lotto-444-original-imaewa2svgghp3hz.jpeg?q=70",
+            "price": {
+                "mrp": 2499,
+                "final_price": 1119
+            },
+            "title": "Lotto VERTIGO Running Shoes For Men"
+        },
+        {
+            "id": "SHOF2APUSZHVAGMU",
+            "colour": {
+                "color": "#8C7853",
+                "title": "Bronze"
+            },
+            "brand": "lockey",
+            "discount": 25,
+            "rating": 4.2,
+            "image": "https://rukminim1.flixcart.com/image/312/312/jehf4i80/shoe/r/y/d/851-6261-9-bata-black-original-imaf35qnxsgsu8pz.jpeg?q=70",
+            "price": {
+                "mrp": 1999,
+                "final_price": 1499
+            },
+            "title": "Bata KIT Slip On For Men"
+        }
+    ]
+}
