@@ -53,6 +53,7 @@ class SearchFilterPane extends React.Component<
   }
 
   componentDidMount = () => {
+    console.log(this.props.readCache());
     this.props.readCache();
     console.log('Filters', this.props.filters);
     if (Object.values(this.props.filters).some(f => this.isEmpty(f) || f.values === [])) {
@@ -239,9 +240,9 @@ const mapStateToProps = state => ({
   filters: state.SearchAppReducer.filtersList
 });
 
-const mapDispatchToProps = dispatch => ({
-  readCache: () => dispatch(SearchActions.readCache()),
-  updateFilters: data => dispatch(SearchActions.updateFilters(data))
-});
+const mapDispatchToProps = {
+  readCache: SearchActions.readCache,
+  updateFilters: SearchActions.updateFilters,
+};
 
 export default connect( mapStateToProps, mapDispatchToProps )(SearchFilterPane);

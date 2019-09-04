@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { CONST_URLS, CONST_STORAGE } from '@data/Constants';
 
 import * as CardActions from '@action/CardActions';
+import { readCache } from '@action/SearchActions';
 
 interface CardsPageProps {
     validation: {}
@@ -19,7 +20,9 @@ interface CardsPageProps {
         expiryYear: number;
         cvv: string;
         type?: string;
-    }[]
+    }[],
+    readCache(data);
+    updateCache(data);
 }
 
 interface CardsPageEventHandlers {
@@ -53,10 +56,10 @@ class CardsPage extends React.Component <CardsPageProps & CardsPageEventHandlers
             }
             let CcCacheState = JSON.parse(window.localStorage.getItem(CONST_STORAGE.CC_STORAGE));
             if (CcCacheState !== null && CcCacheState.savedCards !== undefined) {
-                this.props['readCache'](CcCacheState);
+                this.props.readCache(CcCacheState);
             }
             response.json().then(data => {
-                this.props['updateCache'](data)
+                this.props.updateCache(data)
             });
         });
     }
@@ -119,12 +122,12 @@ const mapStateToProps = (state) => ({
     validation: state['CreditCardsAppReducer']['validation'],
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    readCache: CcCacheState => dispatch(CardActions.readCache(CcCacheState)),
-    updateCache: data => dispatch(CardActions.updateCache(data)),
-    addCard: data => dispatch(CardActions.addCard(data)),
-    removeCard: cardid => dispatch(CardActions.removeCard(cardid)),
-    editCard: cardData => dispatch(CardActions.editCard(cardData)),
-});
+const mapDispatchToProps = {
+    readCache: CardActions.readCache,
+    updateCache: CardActions.updateCache,
+    addCard: CardActions.addCard,
+    removeCard: CardActions.removeCard,
+    editCard: CardActions.editCard,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage);

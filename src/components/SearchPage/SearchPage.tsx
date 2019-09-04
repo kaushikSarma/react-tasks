@@ -4,12 +4,18 @@ import SearchFilterPane from '@component/SearchFiltersPane';
 import SearchContent from '@component/SearchContent';
 import { CONST_URLS } from '@data/Constants';
 
+import * as SearchActions from '@action/SearchActions';
+
 import './index.scss';
 import { Product } from '@data/Product';
+import { connect } from 'react-redux';
 
+interface SearchPageProps {
+    products: Product[];
+    updateCatalog(data);
+}
 interface SearchPageState {
     sortedProducts: Product[],
-    products: Product[],
     sortby: string,
     minprice: number
     maxprice: number;
@@ -17,12 +23,11 @@ interface SearchPageState {
     colors: {}[];
 }
 
-export default class SearchPage extends React.Component<{}, SearchPageState> {
+class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
     constructor(props) {
         super(props);
         this.state = {
-            products: [],
-            sortedProducts: [],
+            sortedProducts: [...this.props.products],
             sortby: 'RELEVANCE',
             minprice: 0,
             maxprice: Number.MAX_SAFE_INTEGER,
@@ -39,9 +44,9 @@ export default class SearchPage extends React.Component<{}, SearchPageState> {
             }
             response.json().then(data => {
                 console.log("PRODUCTS FROM API", data);
+                this.props.updateCatalog(data.products);
                 this.setState({
-                    products: [...data.products],
-                    sortedProducts: [...data.products],
+                    sortedProducts: [...data.products]
                 })
             });
         });
@@ -49,7 +54,7 @@ export default class SearchPage extends React.Component<{}, SearchPageState> {
 
     updateList = () => {
         // first filter list of products
-        let products = [...this.state.products]
+        let products = [...this.props.products]
                         .filter(p => p['price']['final_price'] >= this.state.minprice
                                 && p['price']['final_price'] <= this.state.maxprice);
 
@@ -108,3 +113,13 @@ export default class SearchPage extends React.Component<{}, SearchPageState> {
         </div>
     }
 }
+
+const mapStateToProps = state => ({
+    products: state.SearchAppReducer.products
+})
+
+const mapDispatchToProps = {
+    updateCatalog: SearchActions.updateCatalog
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
