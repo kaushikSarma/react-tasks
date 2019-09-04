@@ -1,33 +1,15 @@
 import * as React from 'react';
 
-import { connect } from 'react-redux';
-
 import SearchFilterPane from '@component/SearchFiltersPane';
 import SearchContent from '@component/SearchContent';
-import { CONST_STORAGE, CONST_URLS } from '@data/Constants';
+import { CONST_URLS } from '@data/Constants';
 
 import './index.scss';
 import { Product } from '@data/Product';
 
-import * as SearchActions from '@action/SearchActions';
-
-interface SearchPageProps {
-    searchfilters: {
-        BRAND:{type:string, values:{}[] } ,
-        COLOR: {type:string, values:{}[] },
-        PRICE: {type:string, values:{}[] },
-    };
-    products: Product[]
-}
-
-interface SearchPageActions {
-    readCache(data);
-    updateFilters(data);
-    updateCatalog(data);
-}
-
 interface SearchPageState {
     sortedProducts: Product[],
+    products: Product[],
     sortby: string,
     minprice: number
     maxprice: number;
@@ -35,11 +17,12 @@ interface SearchPageState {
     colors: {}[];
 }
 
-class SearchPage extends React.Component<SearchPageProps & SearchPageActions, SearchPageState> {
+export default class SearchPage extends React.Component<{}, SearchPageState> {
     constructor(props) {
         super(props);
         this.state = {
-            sortedProducts: [...this.props.products],
+            products: [],
+            sortedProducts: [],
             sortby: 'RELEVANCE',
             minprice: 0,
             maxprice: Number.MAX_SAFE_INTEGER,
@@ -49,23 +32,6 @@ class SearchPage extends React.Component<SearchPageProps & SearchPageActions, Se
     }
 
     componentDidMount = () => {
-        let CacheState = JSON.parse(
-            window.localStorage.getItem(CONST_STORAGE.SEARCH_STORAGE)
-        );
-        console.log(CONST_STORAGE.SEARCH_STORAGE, CacheState);
-        if (CacheState !== null && CacheState.filtersList !== undefined) {
-            this.props.readCache(CacheState);
-        } else {
-            fetch(CONST_URLS.SEARCH_FILTERS_URL).then(response => {
-                if (response.status !== 200) {
-                console.log("Could not load search filters!");
-                return;
-                }
-                response.json().then(data => {
-                    this.props.updateFilters(data)
-                });
-            });
-        }
         fetch(CONST_URLS.SEARCH_PRODUCTS_URL).then(response => {
             if (response.status !== 200) {
                 console.log("Could not fetch list of ");
@@ -73,9 +39,9 @@ class SearchPage extends React.Component<SearchPageProps & SearchPageActions, Se
             }
             response.json().then(data => {
                 console.log("PRODUCTS FROM API", data);
-                this.props.updateCatalog(data);
                 this.setState({
-                    sortedProducts: [...this.props.products]
+                    products: [...data.products],
+                    sortedProducts: [...data.products],
                 })
             });
         });
@@ -83,7 +49,7 @@ class SearchPage extends React.Component<SearchPageProps & SearchPageActions, Se
 
     updateList = () => {
         // first filter list of products
-        let products = [...this.props.products]
+        let products = [...this.state.products]
                         .filter(p => p['price']['final_price'] >= this.state.minprice
                                 && p['price']['final_price'] <= this.state.maxprice);
 
@@ -137,21 +103,8 @@ class SearchPage extends React.Component<SearchPageProps & SearchPageActions, Se
 
     render = () => {
         return <div className="search-page-wrapper">
-            <SearchFilterPane filters={this.props.searchfilters} setFilters={this.setFilters} />
-            <SearchContent searchQuery={window.location.search.slice(1)} sort={this.sort} filtersList={this.props.searchfilters} products={this.state.sortedProducts} />
+            <SearchFilterPane setFilters={this.setFilters} />
+            <SearchContent searchQuery={window.location.search.slice(1)} sort={this.sort} products={this.state.sortedProducts} />
         </div>
     }
 }
-
-const mapStateToProps = state => ({
-    searchfilters: state.SearchAppReducer.filtersList,
-    products: state.SearchAppReducer.products
-});
-
-const mapDispatchToProps = dispatch => ({
-    readCache: (CacheState) => dispatch(SearchActions.readCache(CacheState)),
-    updateFilters: (data) => dispatch(SearchActions.updateFilters(data)),
-    updateCatalog: (data) => dispatch(SearchActions.updateCatalog(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
