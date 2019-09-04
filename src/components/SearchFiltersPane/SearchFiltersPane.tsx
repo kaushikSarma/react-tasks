@@ -1,6 +1,8 @@
 import * as React from "react";
-
+import * as SearchActions from "@action/SearchActions";
+import { connect } from "react-redux";
 import "./index.scss";
+import { CONST_STORAGE, CONST_URLS } from "@data/Constants";
 
 interface SearchFilterProps {
   filters: {
@@ -11,6 +13,11 @@ interface SearchFilterProps {
   setFilters(filters);
 }
 
+interface SearchFiltersActions {
+  readCache();
+  updateFilters(CacheState);
+}
+
 interface SearchFilterState {
   minprice: string;
   maxprice: string;
@@ -18,35 +25,8 @@ interface SearchFilterState {
   colors?: boolean[];
 }
 
-import { useState, useEffect } from "react";
-
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height
-  };
-}
-
-function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return windowDimensions;
-}
-
-export default class SearchFilterPane extends React.Component<
-  SearchFilterProps,
+class SearchFilterPane extends React.Component<
+  SearchFilterProps & SearchFiltersActions,
   SearchFilterState
 > {
   height: number;
@@ -54,11 +34,6 @@ export default class SearchFilterPane extends React.Component<
 
   constructor(props) {
     super(props);
-    // const { height, width } = useWindowDimensions();
-
-    // this.height = height;
-    // this.width = width;
-
     this.state = {
       minprice: "Min",
       maxprice: "Max",
@@ -66,6 +41,33 @@ export default class SearchFilterPane extends React.Component<
       colors: new Array(this.getNumColors()).fill(true)
     };
   }
+
+  isEmpty(obj) {
+    for(var prop in obj) {
+      if(obj.hasOwnProperty(prop)) {
+        return false;
+      }
+    }
+  
+    return JSON.stringify(obj) === JSON.stringify({});
+  }
+
+  componentDidMount = () => {
+    this.props.readCache();
+    console.log('Filters', this.props.filters);
+    if (Object.values(this.props.filters).some(f => this.isEmpty(f) || f.values === [])) {
+      fetch(CONST_URLS.SEARCH_FILTERS_URL).then(response => {
+        if (response.status !== 200) {
+          console.log("Could not load search filters!");
+          return;
+        }
+        response.json().then(data => {
+          console.log('Filters from api', data);
+          this.props.updateFilters(data);
+        });
+      });
+    }
+  };
 
   exists(object) {
     return (
@@ -162,7 +164,6 @@ export default class SearchFilterPane extends React.Component<
   };
 
   render = () => {
-    console.log(window.innerWidth);
     return (
       <form className="search-filters position-absolute">
         <div className="search-filter-group">
@@ -233,3 +234,14 @@ export default class SearchFilterPane extends React.Component<
     );
   };
 }
+
+const mapStateToProps = state => ({
+  filters: state.SearchAppReducer.filtersList
+});
+
+const mapDispatchToProps = dispatch => ({
+  readCache: () => dispatch(SearchActions.readCache()),
+  updateFilters: data => dispatch(SearchActions.updateFilters(data))
+});
+
+export default connect( mapStateToProps, mapDispatchToProps )(SearchFilterPane);

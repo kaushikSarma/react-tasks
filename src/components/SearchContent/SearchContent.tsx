@@ -6,7 +6,6 @@ import { Product } from '@data/Product';
 
 interface SearchContentProps {
     products: Product[],
-    filtersList: {},
     searchQuery: string
     sort(sortby);
 }

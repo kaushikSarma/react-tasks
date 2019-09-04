@@ -6,5 +6,5 @@ export const CONST_URLS = {
 
 export const CONST_STORAGE = {
     CC_STORAGE: 'creditcards',
-    SEARCH_STORAGE: 'searchapp',
+    SEARCH_STORAGE: 'searchapp-filters',
 };
