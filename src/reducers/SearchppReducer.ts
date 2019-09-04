@@ -7,7 +7,8 @@ class SearchAppState {
     };
 
     products: Product[];
-
+    productLoaded: false;
+    
     constructor({brand, color, price, products}: {brand: {}, color: {}, price:{}, products?: Product[]}) {
         this.filtersList.BRAND = brand;
         this.filtersList.COLOR = color;

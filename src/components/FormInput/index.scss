@@ -1,0 +1,14 @@
+input {
+    position: relative;
+}
+div.suggestions-list {
+    position: absolute;
+    background: var(--primary-text);
+    color: var(--secondary);
+    width: 200px;
+    box-shadow: 0 2px 10px var(--secondary-outline);
+    z-index: 100;
+    p {
+        padding: 10px;
+    }
+}

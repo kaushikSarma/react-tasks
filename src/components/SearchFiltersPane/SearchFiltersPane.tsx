@@ -95,7 +95,7 @@ class SearchFilterPane extends React.Component<
       (c, index) => this.state.colors[index]
     );
 
-  updateFilters = event => {
+  updateFilters = (event, callback?) => {
     const name = event.target.name;
     console.log(name);
     const val =
@@ -114,6 +114,7 @@ class SearchFilterPane extends React.Component<
         minindex < maxindex &&
           this.setState({ minprice: val }, () => {
             this.getSearchReults();
+            if (callback !== undefined) callback();
           });
         break;
       }
@@ -128,6 +129,7 @@ class SearchFilterPane extends React.Component<
         minindex < maxindex &&
           this.setState({ maxprice: val }, () => {
             this.getSearchReults();
+            if (callback !== undefined) callback();
           });
         break;
       }
@@ -139,6 +141,7 @@ class SearchFilterPane extends React.Component<
           },
           () => {
             this.getSearchReults();
+            if (callback !== undefined) callback();
           }
         );
         break;
@@ -152,6 +155,7 @@ class SearchFilterPane extends React.Component<
           },
           () => {
             this.getSearchReults();
+            if (callback !== undefined) callback();
           }
         );
         break;
@@ -192,6 +196,8 @@ class SearchFilterPane extends React.Component<
             placeholder="Search Brand"
             onChange={this.updateFilters}
             value={this.state.brand}
+            showSuggestionsNum={5}
+            suggestionsList={this.props.filters.BRAND.values}
           />
         </div>
         <div className="search-filter-group">

@@ -6,12 +6,13 @@ import { Product } from '@data/Product';
 
 interface SearchContentProps {
     products: Product[],
-    searchQuery: string
+    searchQuery: string,
+    isLoading ?: boolean
     sort(sortby);
 }
 
 interface SearchContentState {
-    sortBy: string
+    sortBy: string,
 }
 export default class SearchContent extends React.Component<SearchContentProps, SearchContentState> {
     constructor(props) {
@@ -20,6 +21,7 @@ export default class SearchContent extends React.Component<SearchContentProps, S
             sortBy: 'RELEVANCE'
         };
     }
+    
     sort = (sortby) => {
         this.setState({
             sortBy: sortby
@@ -38,6 +40,7 @@ export default class SearchContent extends React.Component<SearchContentProps, S
                 <span className={`sort-control ${this.state.sortBy === "PRICE_DSC" ? "active" : ""}`} onClick={() => this.sort('PRICE_DSC')}>Price -- High to Low</span>
             </div>
             <div className='result-list'>
+                {this.props.isLoading && <ProductItem id={null} isShimmerObject={true}/>}
                 {this.props.products.map((product, index) => <ProductItem {...product} key={`product-${index}`} />)}
             </div>
         </div>

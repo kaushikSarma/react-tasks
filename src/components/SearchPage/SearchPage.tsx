@@ -21,6 +21,7 @@ interface SearchPageState {
     maxprice: number;
     brand: string;
     colors: {}[];
+    isLoading: boolean;
 }
 
 class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
@@ -32,7 +33,8 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
             minprice: 0,
             maxprice: Number.MAX_SAFE_INTEGER,
             brand: '',
-            colors: []
+            colors: [],
+            isLoading: true
         }
     }
 
@@ -46,7 +48,8 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
                 console.log("PRODUCTS FROM API", data);
                 this.props.updateCatalog(data.products);
                 this.setState({
-                    sortedProducts: [...data.products]
+                    sortedProducts: [...data.products],
+                    isLoading: false
                 })
             });
         });
@@ -109,7 +112,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
     render = () => {
         return <div className="search-page-wrapper">
             <SearchFilterPane setFilters={this.setFilters} />
-            <SearchContent searchQuery={window.location.search.slice(1)} sort={this.sort} products={this.state.sortedProducts} />
+            <SearchContent searchQuery={window.location.search.slice(1)} sort={this.sort} isLoading={this.state.isLoading} products={this.state.sortedProducts} />
         </div>
     }
 }
