@@ -58,8 +58,8 @@ export default class CreditCardForm extends React.Component<CreditCardFormProps,
                     value = this.state.number;
                 } else this.setState({ number: value, type: '' }, this.checkValidityConfig ); 
                 break;
-            case 'expiryMonth': this.setState({ expiryMonth: isNaN(parseInt(value)) ? 0 : parseInt(value) }); break;
-            case 'expiryYear': this.setState({ expiryYear: isNaN(parseInt(value)) ? 0 : parseInt(value) }); break;
+            case 'expiryMonth': this.setState({ expiryMonth: isNaN(parseInt(value)) ? 0 : parseInt(value), dateError: '' }); break;
+            case 'expiryYear': this.setState({ expiryYear: isNaN(parseInt(value)) ? 0 : parseInt(value), dateError: '' }); break;
             case 'cvv': 
                 if(value !== '' && isNaN(parseInt(value.substr(-1)))) {
                     value = this.state.cvv;
@@ -82,8 +82,6 @@ export default class CreditCardForm extends React.Component<CreditCardFormProps,
                 break;
             default: break;
         }
-
-        
     }
 
 
@@ -165,7 +163,9 @@ export default class CreditCardForm extends React.Component<CreditCardFormProps,
                     dateError: ""
                 });
             } else {
-                alert('Invalid Date!')
+                this.setState({
+                    dateError: 'Invalid! Check if input date (MM/YY) is valid and not in the past'
+                })
             }
         } else {
             alert('Please check Card Number and CVV!');

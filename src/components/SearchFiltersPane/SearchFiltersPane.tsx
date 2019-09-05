@@ -174,7 +174,7 @@ class SearchFilterPane extends React.Component<
 
   render = () => {
     return (
-      <form className="search-filters position-absolute">
+      <div className="search-filters position-absolute">
         <div className="search-filter-group">
           <h3>Filters</h3>
         </div>
@@ -209,7 +209,7 @@ class SearchFilterPane extends React.Component<
           />
         <br />
         </div>
-      </form>
+      </div>
     );
   };
 }
