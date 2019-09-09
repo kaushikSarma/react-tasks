@@ -1,0 +1,104 @@
+div.basket {
+    position: fixed;
+    right: 0px;
+    top: 50px;
+    height: auto;
+    max-height: 80%;
+    box-shadow: 0 0 5px var(--secondary);
+    background: var(--primary-highlight);
+    overflow-y: scroll; 
+    
+    div.mini-basket {
+        padding: 10px;
+        cursor: pointer;
+    }
+    div.basket-maximized-wrapper {
+        padding: 20px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 100vw;
+        span.close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--primary-text);
+            font-family: sans-serif;
+            font-size: 40px;
+            font-weight: 200;
+            &:hover {
+                color: var(--primary-highlight);
+            }
+        }
+        &::before{
+            content: '';
+            height: 100vh;
+            width: 100vw;
+            background: rgba($color: #172337, $alpha: 0.4);
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        div.basket-maximized {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            height: 60vh;
+            width: 60vw;
+            background: #ffffff;
+            border-radius: 5px;
+            display: flex;
+            flex-wrap: nowrap;
+            box-shadow: 0 0 10px #3d3d3d;
+            overflow: hidden;
+            div.basket-maximized-details {
+                flex-basis: 30%;
+                text-align: left;
+                padding: 20px; 
+                height: 100%;
+                background: var(--secondary-outline);
+                box-shadow: 0 0 10px var(--secondary);
+                table {
+                    margin-top: 20px;
+                    width: 100%;
+                    border-bottom: 1px solid var(--secondary);
+                    td {
+                        width: 50%;
+                    }
+                    td:nth-of-type(2) {
+                        text-align: right;
+                    }
+                }
+                div.basket-button {
+                    padding: 5px 10px 5px 10px;
+                    margin-top: 10px;
+                    background: var(--primary);
+                    color: var(--primary-text);
+                    border-radius: 5px;
+                    cursor: pointer;
+                    &:hover {
+                        text-decoration: underline;
+                        color: var(--primary-highlight);
+                    }
+                }
+            }
+            div.basket-products-wrapper {
+                flex-basis: 70%;
+                display: flex;
+                flex-wrap: wrap;
+                overflow-y: scroll; 
+                padding: 20px;
+                padding-left: 40px; 
+                h3 {
+                    color: var(--primary) !important;
+                }
+            }
+        }
+    }
+}

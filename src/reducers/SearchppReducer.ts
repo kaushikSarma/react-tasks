@@ -1,5 +1,7 @@
 import { CONST_STORAGE } from "@data/Constants";
 import { Product } from "@data/Product";
+import { stat } from "fs";
+import { start } from "repl";
 
 class SearchAppState {
     filtersList: {BRAND:{} , COLOR: {}, PRICE:{}} = {
@@ -8,7 +10,7 @@ class SearchAppState {
 
     products: Product[];
     productLoaded: false;
-    
+
     constructor({brand, color, price, products}: {brand: {}, color: {}, price:{}, products?: Product[]}) {
         this.filtersList.BRAND = brand;
         this.filtersList.COLOR = color;
@@ -51,13 +53,59 @@ export const SearchAppReducer = (state: SearchAppState = new SearchAppState({
         }
         case "UPDATE_CATALOG": {
             console.log('Updating catalog', action.data);
+            const combinedproductarray = action.data.map(p => {
+                const q = state.products.find(q => q.id === p.id);
+                if ( q !== null && q !== undefined)
+                    p.qty = q.qty;
+                return p;
+            });
             const newstate = new SearchAppState({
                 brand: state.filtersList.BRAND,
                 price: state.filtersList.PRICE,
                 color: state.filtersList.COLOR,
-                products: action.data
+                products: combinedproductarray
             });
             return newstate;
+        }
+        case "INCREASE_QTY": {
+            console.log('Increasing qty', action.id);
+            const newproducts = state.products.map(p => {
+                if(p.id === action.id) p.qty = (p.qty === undefined || p.qty === 0) ? 1 : p.qty + 1
+                return p;
+            })
+            const newstate = new SearchAppState({
+                brand: state.filtersList.BRAND,
+                price: state.filtersList.PRICE,
+                color: state.filtersList.COLOR,
+                products: newproducts
+            });
+            return newstate;
+        }
+        case "DECREASE_QTY": {
+            console.log('Decreasing qty', action.id);
+            const newproducts = state.products.map(p => {
+                if(p.id === action.id) p.qty = (p.qty === undefined || p.qty === 0) ? 0 : p.qty - 1
+                    return p;
+            });
+            const newstate = new SearchAppState({
+                brand: state.filtersList.BRAND,
+                price: state.filtersList.PRICE,
+                color: state.filtersList.COLOR,
+                products: newproducts
+            });
+            return newstate;
+        }
+        case "EMPTY_BASKET": {
+            const newsstate = new SearchAppState ({
+                brand: state.filtersList.BRAND,
+                price: state.filtersList.PRICE,
+                color: state.filtersList.COLOR,
+                products: state.products.map(p => {
+                    delete p.qty;
+                    return p;
+                })
+            });
+            return newsstate;
         }
     }
     return state;

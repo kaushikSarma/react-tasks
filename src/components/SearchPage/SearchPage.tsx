@@ -9,6 +9,7 @@ import * as SearchActions from '@action/SearchActions';
 import './index.scss';
 import { Product } from '@data/Product';
 import { connect } from 'react-redux';
+import Basket from '@component/Basket/Basket';
 
 interface SearchPageProps {
     products: Product[];
@@ -113,6 +114,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
         return <div className="search-page-wrapper">
             <SearchFilterPane setFilters={this.setFilters} />
             <SearchContent searchQuery={window.location.search.slice(1)} sort={this.sort} isLoading={this.state.isLoading} products={this.state.sortedProducts} />
+            <Basket />
         </div>
     }
 }
