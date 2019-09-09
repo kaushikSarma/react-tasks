@@ -42,6 +42,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "redux-thunk": "^2.3.0"
   }
 }

@@ -4,6 +4,7 @@ div.product-item {
     margin-bottom: 40px;
     transition: all 0.2s;
     cursor: pointer;
+    text-align: left;
     div.image-container {
         position: relative;
         width: 200px;
@@ -13,6 +14,7 @@ div.product-item {
     }
     img {
         width: 100%;
+        max-height: 100%;
         position: absolute;
         margin: auto;
         left: 0;
@@ -70,10 +72,11 @@ div.product-item {
         align-items: center;
         justify-content: center;
         margin-right: 0;
-        margin-top: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
         div.image-container {
             flex-basis: 20%;
-            height: auto;
+            height: 200px;
         }
         div.product-desc {
             padding-left: 10px;

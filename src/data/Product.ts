@@ -12,5 +12,6 @@ export interface Product {
         "mrp"?: number
         "final_price"?: number
     },
-    "title"?: string
+    "title"?: string,
+    "qty"?: number,
 }

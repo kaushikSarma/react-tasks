@@ -3,7 +3,9 @@ import * as ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
 import { CreditCardsAppReducer } from 'reducers/CreditCardsAppReducer';
 import { SearchAppReducer } from 'reducers/SearchppReducer';
 
@@ -17,7 +19,7 @@ import './palette.scss';
 import './index.scss';
 
 const RootReducer = combineReducers({ CreditCardsAppReducer, SearchAppReducer });
-const AppStore = createStore(RootReducer);
+const AppStore = createStore(RootReducer, applyMiddleware(thunk));
 
 const render = () => ReactDOM.render(
     <BrowserRouter>

@@ -5,6 +5,7 @@ import Header from "@component/Header";
 import CardsPage from "@component/CardsPage";
 import SearchPage from "@component/SearchPage";
 import { CONST_URLS, CONST_STORAGE } from "@data/Constants";
+import Basket from "@component/Basket/Basket";
 
 
 export default class App extends React.Component {
@@ -20,7 +21,7 @@ export default class App extends React.Component {
         <Switch>
           <Route path={"/search"} render={() => <SearchPage />}/>
           <Route path={"/manage-cards"} render={() => <CardsPage />} />
-          <Redirect from="/" to="/manage-cards"></Redirect>
+          <Redirect from="/" to="/search"></Redirect>
         </Switch>
         </div>
       </React.Fragment>

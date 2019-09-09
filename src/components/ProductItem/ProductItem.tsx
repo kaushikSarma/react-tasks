@@ -2,13 +2,31 @@ import * as React from "react";
 
 import './index.scss';
 import { Product } from "@data/Product";
+import ProductQtyInput from '@component/ProductQuantityInput';
 
 interface ProductItemProps {
     isShimmerObject ?: boolean
-    // "title"?: string
 }
 
-export default class ProductItem extends React.Component<ProductItemProps & Product> {
+interface ProductItemState {
+    qty: number
+}
+export default class ProductItem extends React.Component<ProductItemProps & Product, ProductItemState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            qty: 0
+        }
+    }
+
+    changeProductQty = (step) => {
+        let newqty = this.state.qty + step;
+        newqty = (newqty < 0 || newqty > 99) ? this.state.qty : newqty;
+        this.setState( {
+            qty: newqty
+        })
+        
+    }
     discount = (mrp, final_price) => Math.floor(100*(mrp - final_price)/mrp);
     render = () => {
         if (this.props.isShimmerObject === undefined || !this.props.isShimmerObject) {
@@ -26,10 +44,11 @@ export default class ProductItem extends React.Component<ProductItemProps & Prod
                         { this.props.rating !== undefined && this.props.rating !== 0 && <span className='rating-badge'>{this.props.rating} &#9734;</span> }
                     </div>
                     <p>
-                        <span className='price-final'>&#8377;{this.props.price.final_price}</span>
-                    { hasDiscount && <span className='price-mrp'>&#8377;{this.props.price.mrp}</span> }
-                    { hasDiscount && <span className='price-discount'>{discountPercent}&#37; off</span>}
+                        <span className='price-final'>&#8377;{this.props.price.final_price.toLocaleString('en-IN')}</span>
+                        { hasDiscount && <span className='price-mrp'>&#8377;{this.props.price.mrp.toLocaleString('en-IN')}</span> }
+                        { hasDiscount && <span className='price-discount'>{discountPercent}&#37; off</span>}
                     </p>
+                    <ProductQtyInput qty={this.props.qty} id={this.props.id} />
                 </div>
             </div>)
         } else {
