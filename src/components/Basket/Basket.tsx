@@ -40,12 +40,13 @@ class Basket extends React.Component<BasketProps, BasketState> {
         const totalprice = price === undefined ? 0 : price;
         const totalqty = qty === undefined ? 0 : qty;
         return (<div className='basket'>
-            {!this.state.isExpanded && <div className='mini-basket' onClick={() => {
-                this.setState({ isExpanded: true });
-            }}>
-                <span className='basket-total'>{`${totalqty} item(s) in Basket`}{totalprice > 0 && ` ₹${totalprice.toLocaleString('en-IN')}`}</span>
+            {!this.state.isExpanded && <div className='mini-basket'>
+                <span className='dynamic-offer'>Add 200 more to get Free delivery</span>
+                <span className='basket-total' onClick={() => {
+                    this.setState({ isExpanded: true });
+                }}>{`${totalqty} item(s) in Basket`}{totalprice > 0 && ` ₹${totalprice.toLocaleString('en-IN')}`}</span>
                 <div className='product-preview-wrapper'>
-                    {products.map(p => <ProductItemMini qty={p.qty} url={p.image}/>)}
+                    {products.map(p => <ProductItemMini key={`preview-${p.id}`} qty={p.qty} url={p.image}/>)}
                 </div>
             </div>}
 
@@ -56,8 +57,10 @@ class Basket extends React.Component<BasketProps, BasketState> {
                     <div className='basket-maximized-details'>
                         <h2>Your Basket</h2>
                         <table>
-                            <tr><td>Item(s)</td><td>{totalqty}</td></tr>
-                            <tr><td>Total Cost</td><td>₹{totalprice.toLocaleString('en-IN')}</td></tr>
+                            <tbody>
+                                <tr><td>Item(s)</td><td>{totalqty}</td></tr>
+                                <tr><td>Total Cost</td><td>₹{totalprice.toLocaleString('en-IN')}</td></tr>
+                            </tbody>
                         </table>
                         <div className='basket-button button' onClick={this.props.emptyBasket}>Empty Basket</div>
                         <div className='basket-button button'>Move all to Wishlist</div>

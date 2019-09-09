@@ -26,6 +26,7 @@ div.results-section {
         }
         span.sort-control.active {
             color: var(--primary);
+            border-bottom: 1px solid var(--primary);
         }
     }
     div.result-list {
