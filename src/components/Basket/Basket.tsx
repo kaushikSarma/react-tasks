@@ -44,7 +44,9 @@ class Basket extends React.Component<BasketProps, BasketState> {
                 this.setState({ isExpanded: true });
             }}>
                 <span className='basket-total'>{`${totalqty} item(s) in Basket`}{totalprice > 0 && ` ₹${totalprice.toLocaleString('en-IN')}`}</span>
-                {products.map(p => <ProductItemMini url={p.image}/>)}
+                <div className='product-preview-wrapper'>
+                    {products.map(p => <ProductItemMini qty={p.qty} url={p.image}/>)}
+                </div>
             </div>}
 
             {this.state.isExpanded && 

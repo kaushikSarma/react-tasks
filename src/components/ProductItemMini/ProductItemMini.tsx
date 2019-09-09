@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import './index.scss';
 
 interface ProductItemMiniProps {
-    url: string
+    url: string;
+    qty: number;
 }
 
 class ProductItemMini extends React.Component<ProductItemMiniProps> {
     render() {
-        return (<div className='productitem-preview' style={({backgroundImage: `url(${this.props.url})`})}>
+        return (<div className='productitem-preview' data-count={this.props.qty} style={({backgroundImage: `url(${this.props.url})`})}>
         </div>);
     }
 }
