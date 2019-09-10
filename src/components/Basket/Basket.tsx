@@ -42,7 +42,7 @@ class Basket extends React.Component<BasketProps, BasketState> {
         const totalqty = qty === undefined ? 0 : qty;
         return (<div className='basket'>
             {!this.state.isExpanded && <div className='mini-basket'>
-                {this.props.nextOffer.offer_title !== "" && <span className='dynamic-offer'>{`Add ₹${this.props.nextOffer.basket_difference} to get ${this.props.nextOffer.offer_title}`}</span>}
+                {this.props.nextOffer.offer_title !== "" && totalprice > 0 && <span className='dynamic-offer'>{`Add ₹${this.props.nextOffer.basket_difference} to get ${this.props.nextOffer.offer_title}`}</span>}
                 <span className='basket-total' onClick={() => {
                     this.setState({ isExpanded: true });
                 }}>{`${totalqty} item(s) in Basket`}{totalprice > 0 && ` ₹${totalprice.toLocaleString('en-IN')}`}</span>
