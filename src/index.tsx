@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 
 import { CreditCardsAppReducer } from 'reducers/CreditCardsAppReducer';
 import { SearchAppReducer } from 'reducers/SearchppReducer';
-
+import { BasketReducer } from 'reducers/BasketReducer';
 // importing components
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
@@ -18,8 +18,8 @@ import './resetStyles.scss';
 import './palette.scss';
 import './index.scss';
 
-const RootReducer = combineReducers({ CreditCardsAppReducer, SearchAppReducer });
-const AppStore = createStore(RootReducer, applyMiddleware(thunk));
+const RootReducer = combineReducers({ CreditCardsAppReducer, SearchAppReducer, BasketReducer });
+export const AppStore = createStore(RootReducer, applyMiddleware(thunk));
 
 const render = () => ReactDOM.render(
     <BrowserRouter>

@@ -1,7 +1,5 @@
 import { CONST_STORAGE } from "@data/Constants";
 import { Product } from "@data/Product";
-import { stat } from "fs";
-import { start } from "repl";
 
 class SearchAppState {
     filtersList: {BRAND:{} , COLOR: {}, PRICE:{}} = {

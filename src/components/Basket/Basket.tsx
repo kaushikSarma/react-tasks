@@ -10,6 +10,7 @@ import ProductItemMini from '@component/ProductItemMini/ProductItemMini';
 
 interface BasketProps {
     products: Product[];
+    nextOffer: {min_total: number, offer_title: string, offer_detail: string, basket_difference: number};
     emptyBasket()
 }
 
@@ -41,7 +42,7 @@ class Basket extends React.Component<BasketProps, BasketState> {
         const totalqty = qty === undefined ? 0 : qty;
         return (<div className='basket'>
             {!this.state.isExpanded && <div className='mini-basket'>
-                <span className='dynamic-offer'>Add 200 more to get Free delivery</span>
+                {this.props.nextOffer.offer_title !== "" && <span className='dynamic-offer'>{`Add ₹${this.props.nextOffer.basket_difference} to get ${this.props.nextOffer.offer_title}`}</span>}
                 <span className='basket-total' onClick={() => {
                     this.setState({ isExpanded: true });
                 }}>{`${totalqty} item(s) in Basket`}{totalprice > 0 && ` ₹${totalprice.toLocaleString('en-IN')}`}</span>
@@ -78,7 +79,8 @@ class Basket extends React.Component<BasketProps, BasketState> {
 
 const mapStateToProps = state => 
 ({
-    products: state.SearchAppReducer.products
+    products: state.SearchAppReducer.products,
+    nextOffer: state.BasketReducer.offer
 });
 
 const mapDispatchToProps = {
