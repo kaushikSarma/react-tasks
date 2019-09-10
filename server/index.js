@@ -29,20 +29,25 @@ app.get('/products', (req, res) => {
 app.get('/next-offer', (req, res) => {
     console.log(req.query);
     if(req.query.amount !== undefined) {
-        nextoffer = offerjson.offers
-        .sort((offer1, offer2) => offer1.min_total > offer2.min_total)
-        .filter(offer => offer.min_total > req.query.amount);
-        if (nextoffer.length === 0) {
-            res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({
-                min_total: 0, offer_title: "", offer_detail: "", basket_difference: 0
-            }));
-            return;
-        }
-        nextoffer = nextoffer[0];
+        offers = offerjson.offers
+                    .sort((offer1, offer2) => offer1.min_total > offer2.min_total);
+        curroffer = offers;
+        nextoffer = offers;
+
+        curroffer = curroffer.filter(offer => offer.min_total <= req.query.amount);
+        nextoffer = nextoffer.filter(offer => offer.min_total > req.query.amount);
+        
+
+        curroffer = curroffer.length === 0 ? {min_total: 0, offer_title: "", offer_detail: ""} : curroffer.reverse()[0];
+        nextoffer = nextoffer.length === 0 ? {min_total: 0, offer_title: "", offer_detail: "", basket_difference: 0} : nextoffer[0];
         nextoffer.basket_difference = nextoffer.min_total - req.query.amount;
+        
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(nextoffer));
+        console.log('Seding folowing data: ', nextoffer, curroffer);
+        res.end(JSON.stringify({
+            "next_offer": nextoffer,
+            "curr_offer": curroffer
+        }));
         return;
     }
     res.setHeader('Content-Type', 'application/json');
