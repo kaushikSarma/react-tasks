@@ -9,16 +9,34 @@ div.basket {
     overflow-y: scroll; 
     
     div.mini-basket {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    span.basket-total, span.dynamic-offer {
         padding: 10px;
         cursor: pointer;
     }
 
+
+
     div.product-preview-wrapper {
         position: fixed;
-        z-index: 10;
-        top: 90px;
-        right: 0;
+        z-index: 100;
+        top: 95px;
+        right: 0px;
         box-shadow: 0 0 5px var(--secondary-outline);
+        max-height: 80%;
+        overflow-y: scroll;
+        width: 90px;
+        div.productitem-preview {
+            float: right;
+        }
+    }
+
+    span.dynamic-offer {
+        background: var(--secondary);
+        color: var(--primary-text);
     }
     div.basket-maximized-wrapper {
         padding: 20px;
