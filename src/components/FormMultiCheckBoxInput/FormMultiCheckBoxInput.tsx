@@ -3,11 +3,14 @@ import * as React from 'react';
 interface FormMultiCheckBoxInputProps {
     title: string;
     valueslist: {}[];
-    value: boolean[];
-    onChange(event);
+    name: string;
+    onChange(name, value, callback?);
 }
 
-export default class FormMultiCheckBoxInput extends React.Component<FormMultiCheckBoxInputProps> {
+interface FormMultiCheckBoxInputState {
+    value: boolean[];
+}
+export default class FormMultiCheckBoxInput extends React.Component<FormMultiCheckBoxInputProps, FormMultiCheckBoxInputState> {
     exists(object) {
         return (
             object !== null &&
@@ -17,11 +20,22 @@ export default class FormMultiCheckBoxInput extends React.Component<FormMultiChe
         );
     }
 
-   onInputChange = index => () => {
-    this.setState({
-        colors[index]: value;
-    })
-   } 
+    onInputChange = index => (event) => {
+        let newstate = this.state.value;
+        newstate[index] = event.target.checked;
+        this.setState({
+            value: newstate
+        }, () => {
+            this.props.onChange(this.props.name, this.state.value)
+        });
+    } 
+
+    constructor (props) {
+        super(props);
+        this.state = {
+            value: []
+        }
+    }
     render () {
         return <React.Fragment>
             <h4>{this.props.title}</h4>
@@ -31,9 +45,8 @@ export default class FormMultiCheckBoxInput extends React.Component<FormMultiChe
                   <input
                     type="checkbox"
                     name="colorChoices"
-                    onChange={this.props.onChange(index)}
-                    data-index={index}
-                    checked={this.props.value[index]}
+                    onChange={this.onInputChange(index)}
+                    checked={this.state.value[index]}
                   ></input>
                   <span
                     className="color-display-bubble"

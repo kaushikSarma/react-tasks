@@ -95,69 +95,31 @@ class SearchFilterPane extends React.Component<
       (c, index) => this.state.colors[index]
     );
 
-  updateFilters = (event, callback?) => {
-    const name = event.target.name;
+  updateFilters = (name, value, callback?) => {
     console.log(name);
-    const val =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
     switch (name) {
-      case "minprice": {
-        event.preventDefault();
-        const minindex = this.props.filters.PRICE.values.findIndex(
-          e => e["key"] === val
-        );
-        const maxindex = this.props.filters.PRICE.values.findIndex(
-          e => e["key"] === this.state.maxprice
-        );
-        minindex < maxindex &&
-          this.setState({ minprice: val }, () => {
-            this.getSearchReults();
-            if (callback !== undefined) callback();
-          });
-        break;
-      }
-      case "maxprice": {
-        event.preventDefault();
-        const minindex = this.props.filters.PRICE.values.findIndex(
-          e => e["key"] === this.state.minprice
-        );
-        const maxindex = this.props.filters.PRICE.values.findIndex(
-          e => e["key"] === val
-        );
-        minindex < maxindex &&
-          this.setState({ maxprice: val }, () => {
-            this.getSearchReults();
-            if (callback !== undefined) callback();
-          });
+      case "priceinput": {
+        this.setState({ minprice: value['min'], maxprice: value['max'] },
+        () => {
+          this.getSearchReults();
+          if (callback !== undefined) callback();
+        });
         break;
       }
       case "brand": {
-        event.preventDefault();
-        this.setState(
-          {
-            brand: val
-          },
-          () => {
-            this.getSearchReults();
-            if (callback !== undefined) callback();
-          }
-        );
+        this.setState({ brand: value },
+        () => {
+          this.getSearchReults();
+          if (callback !== undefined) callback();
+        });
         break;
       }
       case "colorChoices": {
-        let newstate = this.state.colors;
-        newstate[event.target.dataset["index"]] = val;
-        this.setState(
-          {
-            colors: newstate
-          },
-          () => {
-            this.getSearchReults();
-            if (callback !== undefined) callback();
-          }
-        );
+        this.setState({ colors: value },
+        () => {
+          this.getSearchReults();
+          if (callback !== undefined) callback();
+        });
         break;
       }
     }
@@ -182,9 +144,8 @@ class SearchFilterPane extends React.Component<
           <FormRangeInput
             title="Price"
             type="range-select"
-            name={{min: "minprice", max:"maxprice"}}
-            value={{min: this.state.minprice, max: this.state.maxprice}}
-            rangeofvaleus={this.props.filters.PRICE.values}
+            name="priceinput"
+            rangeofvalues={this.props.filters.PRICE.values}
             onChange={this.updateFilters}
           />
         </div>
@@ -195,14 +156,13 @@ class SearchFilterPane extends React.Component<
             name="brand"
             placeholder="Search Brand"
             onChange={this.updateFilters}
-            value={this.state.brand}
             showSuggestionsNum={5}
             suggestionsList={this.props.filters.BRAND.values}
           />
         </div>
         <div className="search-filter-group">
-          <FormMultiCheckBoxInput 
-            value={this.state.colors}
+          <FormMultiCheckBoxInput
+            name="colorChoices"
             valueslist={this.props.filters.COLOR.values}
             onChange={this.updateFilters}
             title="Colors"

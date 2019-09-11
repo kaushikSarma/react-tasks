@@ -6,35 +6,40 @@ interface FormInputProps {
     type?: string;
     placeholder?: string;
     name: string;
-    value: string | number;
     suggestionsList ?: {}[];
     showSuggestionsNum ?: number;
-    onChange?(event, callback?);
+    onChange?(name, value, callback?);
 }
 
 interface FormInputState {
     suggestionToShow: string[],
     selectedIndex: number,
     isActive: boolean,
+    value: string,
 }
 
 export default class FormInput extends React.Component<FormInputProps, FormInputState> {
     constructor (props) {
         super (props);
-        this.state = {suggestionToShow: [], selectedIndex: 0, isActive: false};
+        this.state = {suggestionToShow: [], selectedIndex: 0, isActive: false, value: ""};
     }
 
     onChangeHandler = (event) => {
-        this.props.onChange(event, () => {
-            if (this.props.value !== "")
-            this.setState({
-                suggestionToShow: this.props.suggestionsList.filter(s => s['value'].startsWith(this.props.value) ).slice(0, this.props.showSuggestionsNum).map(s => s['value'])
-            });
-            else {
+        event.preventDefault();
+        const val = event.target.value;
+        this.setState({
+            value: val
+        }, () => {
+            if (this.state.value !== "") {
+                this.props.onChange(this.props.name, this.state.value)
+                this.setState({
+                    suggestionToShow: this.props.suggestionsList.filter(s => s['value'].startsWith(this.state.value) ).slice(0, this.props.showSuggestionsNum).map(s => s['value'])
+                });
+            }
+            else
                 this.setState({
                     suggestionToShow: []
-                })
-            }
+                });
         });
     }
 
@@ -59,13 +64,13 @@ export default class FormInput extends React.Component<FormInputProps, FormInput
                 <div className='form-input-wrapper'>
                     <div className={`input-overlay ${this.state.isActive ? " active" : ""}`}>
                         <span className='field-value'>
-                            {this.props.value}
+                            {this.state.value}
                             <span className='cursor'></span>
                         </span>
                         <span className='field-suggesstion'>
-                            {   this.props.value === '' ? "Search by brand" :
+                            {   this.state.value === '' ? "Search by brand" :
                                 this.state.suggestionToShow[this.state.selectedIndex] === undefined ? "" 
-                                : (this.state.suggestionToShow[this.state.selectedIndex]).replace(this.props.value.toString(), '')}
+                                : (this.state.suggestionToShow[this.state.selectedIndex]).replace(this.state.value.toString(), '')}
                         </span>
                     </div>
                     <input className='form-input-custom'
@@ -75,7 +80,7 @@ export default class FormInput extends React.Component<FormInputProps, FormInput
                         onChange={this.onChangeHandler}
                         onFocus={this.onFocus}
                         onBlur={this.onBlur}
-                        value={this.props.value}
+                        value={this.state.value}
                         autoComplete="off"
                     />
                     {this.state.isActive && this.state.suggestionToShow !== undefined 
