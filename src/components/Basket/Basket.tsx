@@ -11,6 +11,7 @@ import ProductItemMini from '@component/ProductItemMini/ProductItemMini';
 interface BasketProps {
     products: Product[];
     nextOffer: {min_total: number, offer_title: string, offer_detail: string, basket_difference: number};
+    currentOffer: {min_total: number, offer_title: string, offer_detail: string};
     emptyBasket()
 }
 
@@ -63,6 +64,14 @@ class Basket extends React.Component<BasketProps, BasketState> {
                                 <tr><td>Total Cost</td><td>₹{totalprice.toLocaleString('en-IN')}</td></tr>
                             </tbody>
                         </table>
+                        <table>
+                            <thead>
+                                <tr><th colSpan={2}>Offer Applied</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colSpan={2}>{this.props.currentOffer.offer_title != "" ? (<div>{this.props.currentOffer.offer_title}<p>{this.props.currentOffer.offer_detail}</p></div>) : "No offer applied currently"}</td></tr>
+                            </tbody>
+                        </table>
                         <div className='basket-button button' onClick={this.props.emptyBasket}>Empty Basket</div>
                         <div className='basket-button button'>Move all to Wishlist</div>
                     </div>
@@ -77,10 +86,10 @@ class Basket extends React.Component<BasketProps, BasketState> {
     }
 }
 
-const mapStateToProps = state => 
-({
+const mapStateToProps = state => ({
     products: state.SearchAppReducer.products,
-    nextOffer: state.BasketReducer.offer
+    nextOffer: state.BasketReducer.offer,
+    currentOffer: state.BasketReducer.current_offer,
 });
 
 const mapDispatchToProps = {

@@ -16,6 +16,12 @@ export default class FormMultiCheckBoxInput extends React.Component<FormMultiChe
             object.length > 0
         );
     }
+
+   onInputChange = index => () => {
+    this.setState({
+        colors[index]: value;
+    })
+   } 
     render () {
         return <React.Fragment>
             <h4>{this.props.title}</h4>
@@ -25,7 +31,7 @@ export default class FormMultiCheckBoxInput extends React.Component<FormMultiChe
                   <input
                     type="checkbox"
                     name="colorChoices"
-                    onChange={this.props.onChange}
+                    onChange={this.props.onChange(index)}
                     data-index={index}
                     checked={this.props.value[index]}
                   ></input>

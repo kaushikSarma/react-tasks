@@ -57,7 +57,8 @@ export function updateQty(productid, qty) {
             console.log(data, 'new action');
             return dispatch({
                 type: BasketActionsTypes.UPDATE_BASKET,
-                offer: data
+                offer: data.next_offer,
+                curr_offer: data.curr_offer
             });
         })
         .catch(err =>{ console.log(err)});
